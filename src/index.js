@@ -22,11 +22,9 @@ function appendCardMarkup(arrCards) {
   arrCards.results.map(
     ({ title, release_date, poster_path }) =>
       (galleryCardsHTML += ` <div class="gallery_card_position">
-      <div class="gallery_card">
         <img src="https://image.tmdb.org/t/p/w500${poster_path}" alt='${title}' class="gallery_img" />
         <p class="card_name">${title}</p>
         <p class="card_descr">Drama | ${release_date.slice(0, 4)}</p>
-      </div>
     </div>`)
   );
   gallery.insertAdjacentHTML('beforeend', galleryCardsHTML);
