@@ -2,18 +2,45 @@
 
 const refs = {
     btnCloseEl: document.querySelector('.modal__btn-close'),
-    backdropEl: document.querySelector('.backdrop')
+    backdropEl: document.querySelector('.backdrop'),
+    galleryEl: document.querySelector('.gallery')
 };
 
-const closeModal = () => {
+function onGalleryClick(e) {
+    if (e.target.tagName !== 'IMG') {
+        return;
+    }
+
+    refs.backdropEl.classList.remove('visually-hidden');
+    
+    document.addEventListener('keydown', onEscDown);
+   
+    refs.btnCloseEl.addEventListener('click', closeModal);
+
+    refs.backdropEl.addEventListener('click', onBackdropClick);
+}
+
+function closeModal() {
     refs.backdropEl.classList.add('visually-hidden');
-};
+    document.removeEventListener('keydown', onEscDown);
+    document.removeEventListener('click', onBackdropClick);
+}
 
-const onEscDown = e => {
+function onEscDown(e) {
     if (e.code === 'Escape') {
         closeModal();
     }
-};
+}
 
-refs.btnCloseEl.addEventListener('click', closeModal);
-document.addEventListener('keydown', onEscDown);
+
+function onBackdropClick(e) {
+    if (e.target.classList.contains('backdrop')) {
+        closeModal();
+    }
+}
+
+
+refs.galleryEl.addEventListener('click', onGalleryClick);
+
+
+
