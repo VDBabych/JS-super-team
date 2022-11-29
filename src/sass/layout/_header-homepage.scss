@@ -1,0 +1,189 @@
+.header {
+  @extend .container;
+  color: var(--pure-white-color);
+  height: 216px;
+  background-image: linear-gradient(
+      to bottom,
+      var(--header-background),
+      var(--header-background)
+    ),
+    url('../images/header/l@1x.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 40px;
+  padding-bottom: 38px;
+}
+
+@media (min-device-pixel-ratio: 2),
+  (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .header {
+    background-image: linear-gradient(
+        to bottom,
+        var(--header-background),
+        var(--header-background)
+      ),
+      url('../images/header/l@2x.png');
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .header {
+    background-image: linear-gradient(
+        to bottom,
+        var(--header-background),
+        var(--header-background)
+      ),
+      url('../images/header/m@1x.png');
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) and (min-device-pixel-ratio: 2),
+  screen and (min-width: 768px) and (max-width: 1199px) and (-webkit-min-device-pixel-ratio: 2),
+  screen and (min-width: 769px) and (max-width: 1199px) and (min-resolution: 192dpi),
+  screen and (min-width: 769px) and (max-width: 1199px) and (min-resolution: 2dppx) {
+  .header {
+    background-image: linear-gradient(
+        to bottom,
+        var(--header-background),
+        var(--header-background)
+      ),
+      url('../images/header/m@2x.png');
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .header {
+    background-image: linear-gradient(
+        to bottom,
+        var(--header-background),
+        var(--header-background)
+      ),
+      url('../images/header/s@1x.png');
+    height: 230px;
+    padding-bottom: 44px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) and (min-device-pixel-ratio: 2),
+  screen and (min-width: 320px) and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2),
+  screen and (min-width: 320px) and (max-width: 767px) and (min-resolution: 192dpi),
+  screen and (min-width: 320px) and (max-width: 767px) and (min-resolution: 2dppx) {
+  .header {
+    background-image: linear-gradient(
+        to bottom,
+        var(--header-background),
+        var(--header-background)
+      ),
+      url('../images/header/s@2x.png');
+    height: 230px;
+    padding-bottom: 44px;
+  }
+}
+
+.nav_group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-group {
+  margin-right: auto;
+
+  &_link {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.logo-filmoteka {
+  font-weight: 500;
+  font-size: 30px;
+  line-height: calc(35.16 / 30);
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .logo-filmoteka {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+}
+
+.header_icon-film {
+  fill: none;
+  stroke: var(--pure-white-color);
+  stroke: var(--pure-white-color);
+  margin-right: 10px;
+}
+
+.header_nav-list {
+  padding-top: 9px;
+  display: inline-flex;
+  gap: 40px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.header_nav-link-current {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    right: 0;
+    width: 100%;
+    border-bottom: solid 3px var(--secondary-accent-color);
+  }
+}
+
+.header_search-input {
+  margin: 40px auto 20px auto;
+  display: block;
+  width: 394px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 0.5px solid var(--pure-white-color);
+  color: var(--pure-white-color);
+  position: relative;
+  font-size: 14px;
+  line-height: calc(16.41/14);
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .header_search-input {
+    width: 336px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .header_search-input {
+    width: 280px;
+    margin-top: 54px;
+    margin-bottom: 16px;
+  }
+}
+
+.header_icon-search {
+  fill: none;
+  stroke: var(--pure-white-color);
+  stroke: var(--pure-white-color);
+  position: absolute;
+  top: 118px;
+  left: 823px;
+}
+
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  display: none;
+}
