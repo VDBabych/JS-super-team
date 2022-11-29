@@ -1,14 +1,18 @@
 .gallery {
+  max-width: 480px;
   padding-top: 20px;
   @include mq(tab) {
     padding-top: 59px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    // justify-content: center;
     gap: 32px;
+    max-width: 768px;
   }
   @include mq(desk) {
-    gap: 0;
+    gap: 16px;
+    max-width: 1280px;
   }
 }
 
@@ -17,37 +21,21 @@
   margin-right: auto;
   min-width: 280px;
   width: 100%;
-  //   max-width: 440px;
+
+  max-width: 440px;
   text-align: start;
   @include mq(tab) {
     margin-left: 0;
     margin-right: 0;
 
-    width: calc((100% - 32px) / 2);
-    &:last-of-type {
-    }
-  }
-  @include mq(desk) {
-    width: calc((100% - 32px) / 3);
-    margin-right: 16px;
-    margin-bottom: 32px;
-    &:nth-of-type(3n) {
-      margin-right: 0;
-    }
-    &:nth-last-of-type(-n + 3) {
-      margin-bottom: 0;
-    }
-  }
-}
-.gallery_card {
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 280px;
-  max-width: 440px;
-  @include mq(tab) {
     width: 336px;
   }
+  @include mq(desk) {
+    width: 394px;
+    margin-bottom: 16px;
+  }
 }
+
 .gallery_img {
   margin-bottom: 10px;
 
@@ -71,6 +59,10 @@
   @include mq(tab) {
     line-height: calc(16 / 12);
   }
+  @include mq(desk) {
+    font-size: 20px;
+    line-height: calc(24 / 20);
+  }
 }
 .card_descr {
   margin-bottom: 20px;
@@ -80,6 +72,10 @@
   @include mq(tab) {
     margin-bottom: 0;
     line-height: calc(16 / 12);
+  }
+  @include mq(desk) {
+    font-size: 20px;
+    line-height: 24px;
   }
 }
 .card_rating {
