@@ -1,3 +1,5 @@
+import './js/modal-close';
+
 const axios = require('axios').default;
 
 const gallery = document.querySelector('.gallery');
