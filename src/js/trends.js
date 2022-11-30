@@ -31,6 +31,7 @@ async function contentLoaded() {
 
   try {
     const arrCards = await fetchMovieCard();
+    appendCardMarkup(arrCards);
   } catch (error) {
     Notify.failure(error.message);
     return;
@@ -42,8 +43,6 @@ async function contentLoaded() {
     Notify.failure(error.message);
     return;
   }
-
-  appendCardMarkup(arrCards);
 }
 
 // ----------------Запит на бекенд за трендами---------------------------
