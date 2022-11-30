@@ -91,6 +91,3 @@ function onBackdropClick(e) {
 // }
 
 refs.galleryEl.addEventListener('click', onGalleryClick);
-
-
-
