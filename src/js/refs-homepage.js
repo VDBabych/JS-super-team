@@ -4,6 +4,6 @@ export const refs = {
   searchForm: document.querySelector('.search-form'),
   gallery: document.querySelector('.gallery'),
   container: document.getElementById('tui-pagination-container'),
-  notifySearchFailure: document.querySelector('.search-notify-failure')
+  notifySearchFailure: document.querySelector('.search-notify-failure'),
   spinner: document.querySelector('.lds-roller'),
 };
