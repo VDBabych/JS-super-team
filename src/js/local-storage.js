@@ -3,60 +3,59 @@ const STORAGE_QUEUE = 'queue-state';
 
 const refs = {
     libraryWatched: document.querySelector('.header-library__btn.watched'),
-    libraryQueue: document.querySelector('.header-library__btn.queue'),
-    cardId: document.querySelector('modal__img')
-    // addLibraryWatched: document.querySelector('.btn-add-watched'),
-    // addLibraryQueue: document.querySelector('.btn-add-queue')
+    libraryQueue: document.querySelector('.header-library__btn.queue')
 };
 
 
 
 let selectedQueue = [];
+let selectedWatched = [];
 
-// addSelectedQueue
+initForm();
 
 export function addSelectedWatched(e) {
-    let selectedWatched = [];
-    selectedWatched.push(e)
+    
+    const ImgSelecte = document.querySelector('.modal__img');
+    const ImgId = ImgSelecte.dataset.id;
+
+    if (selectedWatched.includes(ImgId)) {
+        selectedWatched.splice(selectedWatched.indexOf(ImgId), 1)
+    } else { 
+        selectedWatched.push(ImgId);
+    };
+
     localStorage.setItem(STORAGE_WATCHED, JSON.stringify(selectedWatched));
-}
+};
 
 export function addSelectedQueue(e) {
-    let selectedWatched = [];
-    selectedWatched.push(e)
-    localStorage.setItem(STORAGE_WATCHED, JSON.stringify(selectedWatched));
-}
+    
+    const ImgSelecte = document.querySelector('.modal__img');
+    const ImgId = ImgSelecte.dataset.id;
 
-function getSelectedWatched(e) {
-   let StorageItem =  JSON.parse(localStorage.getItem(STORAGE_WATCHED));
-}
+    if (selectedQueue.includes(ImgId)) {
+        selectedQueue.splice(selectedQueue.indexOf(ImgId), 1)
+    } else { 
+        selectedQueue.push(ImgId);
+    };
 
-// initForm();
+    localStorage.setItem(STORAGE_QUEUE, JSON.stringify(selectedQueue));
+};
 
-// refs.addLibraryWatched.addEventListener('click', () => {
-//     // const selectedId = ;
+function initForm() {
+    let persistedFiltersQueue = JSON.parse(localStorage.getItem(STORAGE_QUEUE));
+    let persistedFiltersWatched = JSON.parse(localStorage.getItem(STORAGE_WATCHED));
+  
+  if (persistedFiltersWatched) {
+    persistedFiltersWatched.forEach(e => {
+        selectedWatched.push(e);
+    });
+    };
+    
+  if (persistedFiltersQueue) {
+    persistedFiltersQueue.forEach(e => {
+        selectedQueue.push(e);
+    });
+    };  
+};
 
-//     localStorage.setItem(STORAGE_WATCHED, JSON.stringify(selectedId));
-// });
 
-
-// filterForm.addEventListener('click', onFormSubmit);
-
-// function onFormSubmit(evt) {
-//   evt.preventDefault();
-//   evt.currentTarget.reset();
-//   localStorage.removeItem(STORAGE_KEY);
-//   selectedFilters = {}; 
-// }
-
-
-// function initForm() {
-//   let persistedFilters = localStorage.getItem(STORAGE_KEY);
-//   if (persistedFilters) {
-//     persistedFilters = JSON.parse(persistedFilters)
-//     Object.entries(persistedFilters).forEach(([name, value]) => {
-//       selectedFilters[name] = value;
-//       filterForm.elements[name].value = value;
-//     });
-//   }
-// };
