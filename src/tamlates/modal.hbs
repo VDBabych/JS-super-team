@@ -20,10 +20,14 @@
                 <p class="modal__caption"> Genre</p>
             </div>
             <div class="modal__wrap-value">
-                <p class="modal__value"><span>7.3</span> / 1260</p>
-                <p class="modal__value">100.2</p>
+                <p class="modal__value"><span class="actent-color">{{this.vote_average}}</span> / {{this.vote_count}}</p>
+                <p class="modal__value">{{this.popularity}}</p>
                 <p class="modal__value"> {{this.original_title}}</p>
-                <p class="modal__value">Western</p>
+                <p class="modal__value value-flex">
+                {{#each this.genres}}
+                    <span>{{this.name}}/</span>
+                {{/each}}
+                </p>
             </div>
         </div>
         <h2 class="modal__about">
