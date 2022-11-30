@@ -1,11 +1,12 @@
-const axios = require('axios').default;
+import axios from 'axios';
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 import cardHTML from '../tamlates/gallery-card.hbs';
+import { refs } from './refs-homepage';
 
-const gallery = document.querySelector('.gallery');
+// const gallery = document.querySelector('.gallery');
 document.addEventListener('DOMContentLoaded', contentLoaded);
-const container = document.getElementById('tui-pagination-container');
+// const container = document.getElementById('tui-pagination-container');
 
 const options = {
   totalItems: 20000,
@@ -34,14 +35,14 @@ const options = {
   // },
 };
 
-const myPagination = new Pagination(container, options);
+const myPagination = new Pagination(refs.container, options);
 myPagination.on('afterMove', eventData => {
   options.page = eventData.page;
   contentLoaded();
 });
 
 async function contentLoaded() {
-  gallery.innerHTML = '';
+  refs.gallery.innerHTML = '';
   const arrCards = await fetchMovieCard();
   const arrOfGenres = await fetchGenreIds();
   console.log(arrCards);
@@ -62,7 +63,7 @@ async function fetchGenreIds() {
 
   return arrGenres.data.genres;
 }
-function appendCardMarkup(arrCards) {
+export function appendCardMarkup(arrCards) {
   const newArrCard = arrCards.results.map(result => {
     return {
       ...result,
@@ -71,7 +72,7 @@ function appendCardMarkup(arrCards) {
     };
   });
   console.log(newArrCard);
-  gallery.insertAdjacentHTML('beforeend', cardHTML(newArrCard));
+  refs.gallery.insertAdjacentHTML('beforeend', cardHTML(newArrCard));
 }
 function definitionGenre(id) {
   const listAllGenres = JSON.parse(sessionStorage.getItem('genres'));
