@@ -1,90 +1,3 @@
-.header-background {
-  background-image: linear-gradient(
-      to bottom,
-      var(--header-background),
-      var(--header-background)
-    ),
-    url('../images/header/l@1x.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.header {
-  @extend .container;
-  color: var(--pure-white-color);
-  height: 216px;
-  padding-top: 40px;
-  padding-bottom: 38px;
-}
-
-@media (min-device-pixel-ratio: 2),
-  (-webkit-min-device-pixel-ratio: 2),
-  (min-resolution: 192dpi),
-  (min-resolution: 2dppx) {
-  .header-background {
-    background-image: linear-gradient(
-        to bottom,
-        var(--header-background),
-        var(--header-background)
-      ),
-      url('../images/header/l@2x.png');
-  }
-}
-
-@include mq(tab-only) {
-  .header-background {
-    background-image: linear-gradient(
-        to bottom,
-        var(--header-background),
-        var(--header-background)
-      ),
-      url('../images/header/m@1x.png');
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1279px) and (min-device-pixel-ratio: 2),
-  screen and (min-width: 768px) and (max-width: 1279px) and (-webkit-min-device-pixel-ratio: 2),
-  screen and (min-width: 768px) and (max-width: 1279px) and (min-resolution: 192dpi),
-  screen and (min-width: 768px) and (max-width: 1279px) and (min-resolution: 2dppx) {
-  .header-background {
-    background-image: linear-gradient(
-        to bottom,
-        var(--header-background),
-        var(--header-background)
-      ),
-      url('../images/header/m@2x.png');
-  }
-}
-
-@include mq(mob-only) {
-  .header-background {
-    background-image: linear-gradient(
-        to bottom,
-        var(--header-background),
-        var(--header-background)
-      ),
-      url('../images/header/s@1x.png');
-    height: 230px;
-    padding-bottom: 44px;
-  }
-}
-
-@media screen and (min-width: 320px) and (max-width: 767px) and (min-device-pixel-ratio: 2),
-  screen and (min-width: 320px) and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2),
-  screen and (min-width: 320px) and (max-width: 767px) and (min-resolution: 192dpi),
-  screen and (min-width: 320px) and (max-width: 767px) and (min-resolution: 2dppx) {
-  .header-background {
-    background-image: linear-gradient(
-        to bottom,
-        var(--header-background),
-        var(--header-background)
-      ),
-      url('../images/header/s@2x.png');
-    height: 230px;
-    padding-bottom: 44px;
-  }
-}
-
 .nav_group {
   display: flex;
   justify-content: space-between;
@@ -163,6 +76,20 @@
   justify-content: space-between;
 }
 
+@include mq(tab-only) {
+  .search-form {
+    width: 336px;
+  }
+}
+
+@include mq(mob-only) {
+  .search-form {
+    width: 280px;
+    margin-top: 54px;
+    margin-bottom: 16px;
+  }
+}
+
 .header_search-input {
   background-color: transparent;
   border: none;
@@ -176,20 +103,6 @@
    outline: none;
   }
 
-}
-
-@include mq(tab-only) {
-  .header_search-input {
-    width: 336px;
-  }
-}
-
-@include mq(mob-only) {
-  .header_search-input {
-    width: 280px;
-    margin-top: 54px;
-    margin-bottom: 16px;
-  }
 }
 
 .homepage_search-btn {
@@ -208,4 +121,10 @@
   fill: none;
   stroke: var(--pure-white-color);
   stroke: var(--pure-white-color);
+}
+
+.search-notify-failure {
+  font-size: 14px;
+  color: var(--secondary-accent-color);
+  text-align: center;
 }
