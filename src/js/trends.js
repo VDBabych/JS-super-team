@@ -1,13 +1,12 @@
-const axios = require('axios').default;
+import axios from 'axios';
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 import cardHTML from '../tamlates/gallery-card.hbs';
+import { refs } from './refs-homepage';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-const gallery = document.querySelector('.gallery');
+// const gallery = document.querySelector('.main');
 document.addEventListener('DOMContentLoaded', contentLoaded);
-
-//-------------------Пагінація----------------------------------------------------------------
-const container = document.getElementById('tui-pagination-container');
 
 const options = {
   totalItems: 20000,
@@ -19,20 +18,31 @@ const options = {
   lastItemClassName: 'tui-last-child',
 };
 
-const myPagination = new Pagination(container, options);
-myPagination.on('afterMove', eventData => {
+export const trendPagination = new Pagination(refs.container, options);
+trendPagination.on('afterMove', eventData => {
   options.page = eventData.page;
   contentLoaded();
 });
+
 // -------------------Збірна функуція при завантаженні сторінки-----------------------------------------------------------------
 
 async function contentLoaded() {
-  gallery.innerHTML = '';
-  const arrCards = await fetchMovieCard();
+  refs.gallery.innerHTML = '';
 
-  const arrOfGenres = await fetchGenreIds();
+  try {
+    const arrCards = await fetchMovieCard();
+  } catch (error) {
+    Notify.failure(error.message);
+    return;
+  }
 
-  sessionStorage.setItem('genres', JSON.stringify(arrOfGenres));
+  try {
+    await fetchGenreIds();
+  } catch (error) {
+    Notify.failure(error.message);
+    return;
+  }
+
   appendCardMarkup(arrCards);
 }
 
@@ -46,20 +56,18 @@ async function fetchMovieCard() {
 
 // ---------------Запит на бекенд за списком жанрів та запис на SessionStorage-------------------
 async function fetchGenreIds() {
-  // if (sessionStorage.getItem('genre')) {
-  //   return;
-  // }
+  if (sessionStorage.getItem('genres') !== null) {
+    return;
+  }
   const arrGenres = await axios.get(
     'https://api.themoviedb.org/3/genre/movie/list?api_key=9cda16d98a6e510af2decf0d66e8e7d5'
   );
-  // sessionStorage.setItem('genres', JSON.stringify(arrGenres.data.genres));
-  return arrGenres.data.genres;
+  console.log('hi');
+  sessionStorage.setItem('genres', JSON.stringify(arrGenres.data.genres));
 }
 
-// --------------Рендер і верстка карток------------------------
-// Створюється новий масив об'єктів з зміненими данними
-// і вже по ньому створюється картка
-function appendCardMarkup(arrCards) {
+// -------------Створення нового массиву з зміненими данними і рендер карток---------
+export function appendCardMarkup(arrCards) {
   const newArrCard = arrCards.results.map(result => {
     return {
       ...result,
@@ -67,7 +75,8 @@ function appendCardMarkup(arrCards) {
       genre_names: result.genre_ids.map(id => definitionGenre(id)).join(', '),
     };
   });
-  gallery.insertAdjacentHTML('beforeend', cardHTML(newArrCard));
+  console.log(newArrCard);
+  refs.gallery.insertAdjacentHTML('beforeend', cardHTML(newArrCard));
 }
 
 // ------------Визначення назви жанру за однним id---------------
