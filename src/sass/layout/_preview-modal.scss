@@ -196,9 +196,17 @@
     }
 }
 
+
+
 .btn-add-watched, .btn-add-queue {
     border: 1px solid black;
     background-color: var(--pure-white-color);
+}
+
+.btn-add-active {
+    background-color: var(--main-accent-color);
+    border: none;
+    color: var(--pure-white-color);
 }
 
 .modal-icon-close {
