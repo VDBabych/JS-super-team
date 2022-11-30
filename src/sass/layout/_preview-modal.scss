@@ -1,3 +1,11 @@
+//  srcset="./images/modal/lg-@1x.jpg 375w,
+//                 ./images/modal/lg-@2x.jpg 750w,
+//                 ./images/modal/md-@1x.jpg 264w,
+//                 ./images/modal/md-@2x.jpg 528w,
+//                 ./images/modal/sm-@1x.jpg 240w,
+//                 ./images/modal/sm-@2x.jpg 480w"
+//         sizes="(min-width: 1280px) 375px, (min-width: 768px) 264px, (min-width: 320px) 240px"
+
 .is-hidden {
     display: none;
 }
@@ -11,6 +19,19 @@
     height: 100%;
     overflow: scroll;
     background-color: rgba(0, 0, 0, 0.250);
+}
+
+.modal__img {
+    border-radius: 5px;
+    width: 240px;
+
+    @media screen and (min-width: 768px) {
+        width: 264px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        width: 375px;
+    }
 }
 
 .modal {
