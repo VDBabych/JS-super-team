@@ -16,7 +16,8 @@ const refs = {
 
 async function onGalleryClick(e) {
     const item = e.target.closest('.gallery_card');
-    const idMovie = e.target.dataset.id;
+    const idMovie = item.dataset.id;
+    document.body.style.overflow = "hidden";
 
     if (!item) {
         return;
@@ -25,10 +26,19 @@ async function onGalleryClick(e) {
     
     try {
         const response = await fetchMovieBuId(idMovie);
-        gangePropertiesOfMovie(response);
         console.log(response.data);
+        const propertieMovie = {
+            ...response.data,
+            popularity: response.data.popularity.toFixed(0),
+            vote_average: response.data.vote_average.toFixed(1),
+            genres: response.data.genres.map(({name}) => {
+                return name;
+            }).join(', ')
+        };
+        console.log(propertieMovie);
 
-        refs.backdropEl.innerHTML = createModalMurkupById(response.data);
+
+        refs.backdropEl.innerHTML = createModalMurkupById(propertieMovie);
     } catch (error) {
         Notify.failure(error.message);
         return;
@@ -36,6 +46,7 @@ async function onGalleryClick(e) {
 
     
     refs.backdropEl.classList.remove('visually-hidden');
+    
     
     refs.btnCloseEl = document.querySelector('.modal__btn-close');
     refs.btnAddWatched = document.querySelector('.btn-add-watched');
@@ -56,6 +67,9 @@ function closeModal() {
     refs.backdropEl.removeEventListener('click', onBackdropClick);
     refs.btnCloseEl.removeEventListener('click', closeModal);
     refs.backdropEl.classList.add('visually-hidden');
+    refs.btnAddWatched.removeEventListener('click', addSelectedWatched);
+    refs.btnAddQueue.removeEventListener('click', addSelectedQueue);
+    document.body.style.overflow = "";
 }
 
 function onEscDown(e) {
@@ -71,10 +85,10 @@ function onBackdropClick(e) {
     }
 }
 
-function gangePropertiesOfMovie(movie) {
-    movie.data.popularity = Number(movie.data.popularity).toFixed(1);
-    movie.data.vote_average = movie.data.vote_average.toFixed(1);
-}
+// function gangePropertiesOfMovie(movie) {
+//     movie.data.popularity = Number(movie.data.popularity).toFixed(1);
+//     movie.data.vote_average = movie.data.vote_average.toFixed(1);
+// }
 
 refs.galleryEl.addEventListener('click', onGalleryClick);
 
