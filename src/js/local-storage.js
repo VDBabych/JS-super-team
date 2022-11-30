@@ -6,7 +6,7 @@ const refs = {
     libraryQueue: document.querySelector('.header-library__btn.queue')
 };
 
-
+// initForm();
 
 let selectedQueue = [];
 let selectedWatched = [];
