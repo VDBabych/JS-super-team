@@ -1,6 +1,9 @@
 <div class="modal">
     <button class="modal__btn-close" type="button">
-        x
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 8L22 22" stroke="black" stroke-width="2" />
+            <path d="M8 22L22 8" stroke="black" stroke-width="2" />
+        </svg>
     </button>
     <img src="https://image.tmdb.org/t/p/w500{{this.poster_path}}"
          alt="photo-of-films" 
@@ -22,12 +25,8 @@
             <div class="modal__wrap-value">
                 <p class="modal__value"><span class="actent-color">{{this.vote_average}}</span> / {{this.vote_count}}</p>
                 <p class="modal__value">{{this.popularity}}</p>
-                <p class="modal__value"> {{this.original_title}}</p>
-                <p class="modal__value value-flex">
-                {{#each this.genres}}
-                    <span>{{this.name}}/</span>
-                {{/each}}
-                </p>
+                <p class="modal__value orig-title"> {{this.original_title}}</p>
+                <p class="modal__value genres">{{this.genres}}</p>
             </div>
         </div>
         <h2 class="modal__about">
