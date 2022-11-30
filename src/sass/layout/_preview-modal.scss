@@ -130,7 +130,7 @@
 .modal__value {
     color: #000000;
 }
-.modal__value span {
+.modal__value .actent-color {
     display: inline-block;
     background-color: var(--main-accent-color);
     color: var(--pure-white-color);
@@ -140,6 +140,12 @@
 }
 .modal__value:not(:last-child) {
     margin-bottom: 8px;
+}
+
+.value-flex {
+    display: flex;
+    flex-wrap: wrap;
+    
 }
 
 .modal__about {

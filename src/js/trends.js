@@ -74,8 +74,7 @@ export function appendCardMarkup(arrCards) {
   refs.gallery.insertAdjacentHTML('beforeend', cardHTML(newArrCard));
 }
 
-// ------------Визначення назви жанру за однним id---------------
-function definitionGenre(id) {
+export function definitionGenre(id) {
   const listAllGenres = JSON.parse(sessionStorage.getItem('genres'));
   const searchedGenre = listAllGenres.find(genre => genre.id === id);
 
