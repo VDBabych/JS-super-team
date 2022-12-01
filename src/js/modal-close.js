@@ -2,7 +2,6 @@
 import { fetchMovieBuId } from './fatch-movie-by-id';
 import createModalMurkupById from '../tamlates/modal.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { definitionGenre } from './trends';
 import { addSelectedWatched } from './local-storage';
 import { addSelectedQueue } from './local-storage';
 import { initId } from './local-storage';
