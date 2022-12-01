@@ -1,11 +1,12 @@
 import axios from "axios";
-class MovieAPI {
+export class MovieAPI {
     #API_KEY;
     #BASE_URL;
     #GENRE_PATH;
     #TENDS_PATH;
     #SEARCH_PATH;
     #totalResults;
+    #query;
     constructor() {
         this.#API_KEY = '9cda16d98a6e510af2decf0d66e8e7d5';
         this.#BASE_URL = 'https://api.themoviedb.org/3/';
@@ -13,8 +14,9 @@ class MovieAPI {
         this.#TENDS_PATH = 'trending/movie/week';
         this.#SEARCH_PATH = 'search/movie';
         this.#totalResults = null;
+        this.#query = null;
     }
-    async getGeners() {
+    async getGenres() {
         const { data } = await axios.get(`${this.#BASE_URL}${this.#GENRE_PATH}`, {
             params: {
                 api_key: this.#API_KEY
@@ -33,13 +35,13 @@ class MovieAPI {
         return data
     }
 
-    async getSearchMovie(query, page = 1) {
+    async getSearchMovie(page = 1) {
         const { data } = await axios.get(`${this.#BASE_URL}${this.#SEARCH_PATH}`, {
             params: {
                 api_key: this.#API_KEY,
                 language: 'en-US',
                 page,
-                query
+                query: this.#query
             }
         })
         this.#setTotalResults(data.total_results)
@@ -58,6 +60,10 @@ class MovieAPI {
 
     #setTotalResults(num) {
         this.#totalResults = num;
+    }
+
+    setQuery(str) {
+        this.#query = str;
     }
 
     getTotalResults() {
