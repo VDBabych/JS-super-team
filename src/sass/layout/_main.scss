@@ -32,6 +32,7 @@ section {
   min-width: 280px;
   width: 100%;
 
+
   max-width: 440px;
   text-align: start;
   @include mq(tab) {
@@ -44,35 +45,46 @@ section {
     width: 394px;
     margin-bottom: 16px;
   }
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
+}
+
+.div-gallery_img {
+position: relative;
+overflow: hidden;
 }
 
 .gallery_img {
-  margin-bottom: 10px;
 
   width: 100%;
-
   border-radius: 5px;
+
   @include mq(tab) {
-    margin-bottom: 8px;
     width: 336px;
     height: 455px;
     max-width: 100%;
   }
   @include mq(desk) {
-    margin-bottom: 12px;
     width: 395px;
     height: 574px;
   }
 }
 .card_name {
+  margin-top: 10px;
+
   font-weight: 500;
   line-height: calc(14 / 12);
   text-transform: uppercase;
   @include mq(tab) {
+    margin-top: 8px;
     margin-bottom: 3px;
     line-height: calc(16 / 12);
   }
   @include mq(desk) {
+    margin-top: 12px;
     font-size: 20px;
     line-height: calc(24 / 20);
   }
