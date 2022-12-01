@@ -4,11 +4,12 @@ import 'tui-pagination/dist/tui-pagination.css';
 import cardHTML from '../tamlates/gallery-card.hbs';
 import { refs } from './refs-homepage';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { getFilmCardsBySearch, isSubmitActiv } from './search';
 
 // const gallery = document.querySelector('.main');
 document.addEventListener('DOMContentLoaded', contentLoad);
 
-const options = {
+export const options = {
   totalItems: 20000,
   itemsPerPage: 20,
   visiblePages: 10,
@@ -19,8 +20,15 @@ const options = {
 };
 
 export const trendPagination = new Pagination(refs.container, options);
+
 trendPagination.on('afterMove', eventData => {
   options.page = eventData.page;
+
+  console.log(isSubmitActiv);
+  if (isSubmitActiv === true) {
+    getFilmCardsBySearch(options.page);
+    return;
+  }
   contentLoad();
 });
 
