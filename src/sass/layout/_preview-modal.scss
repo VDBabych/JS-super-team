@@ -6,10 +6,6 @@
 //                 ./images/modal/sm-@2x.jpg 480w"
 //         sizes="(min-width: 1280px) 375px, (min-width: 768px) 264px, (min-width: 320px) 240px"
 
-.is-hidden {
-    display: none;
-}
-
 .backdrop {
     position: fixed;
    
@@ -17,9 +13,25 @@
     left: 0;
     width: 100vw;
     height: 100%;
-    overflow: scroll;
     background-color: rgba(0, 0, 0, 0.250);
+    transform: scale(1);
+    transition: transform 0.2s ease;
+
+    @media screen and (max-width: 767px) {
+        overflow: scroll;
+    }
 }
+
+
+
+  .is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    transform: scale(0);
+}
+
+
 
 .modal__img {
     border-radius: 5px;
@@ -213,26 +225,5 @@
     fill: #000000;
 }
 
+// ===============================================================================
 
-
-
-
-.one {
-    transform:scaleY(.01) scaleX(0);
-    animation:unfoldIn 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-    .backdrop {
-      .modal {
-        transform:scale(0);
-        animation: zoomIn .5s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-      }
-    }
-    &.out {
-      transform:scale(1);
-      animation:unfoldOut 1s .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-      .modal-background {
-        .modal {
-          animation: zoomOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-        }
-      }
-    }
-  }

@@ -43,9 +43,9 @@ async function onGalleryClick(e) {
         Notify.failure(error.message);
         return;
     }
-
     
-    refs.backdropEl.classList.remove('visually-hidden');
+    refs.backdropEl.classList.remove('is-hidden');
+    
     
     
     refs.btnCloseEl = document.querySelector('.modal__btn-close');
@@ -66,7 +66,7 @@ function closeModal() {
     document.removeEventListener('keydown', onEscDown);
     refs.backdropEl.removeEventListener('click', onBackdropClick);
     refs.btnCloseEl.removeEventListener('click', closeModal);
-    refs.backdropEl.classList.add('visually-hidden');
+    refs.backdropEl.classList.add('is-hidden');
     refs.btnAddWatched.removeEventListener('click', addSelectedWatched);
     refs.btnAddQueue.removeEventListener('click', addSelectedQueue);
     document.body.style.overflow = "";
