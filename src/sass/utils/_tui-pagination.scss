@@ -1,0 +1,54 @@
+.tui-pagination .main-page-pag-btn {
+  display: inline-block;
+  position: relative;
+  width: 28px;
+  padding: 8px 0 6px;
+  margin-left: 0;
+  color: var(--main-text-color);
+  font-family: 'Roboto';
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  vertical-align: middle;
+  border-radius: 5px;
+}
+
+.tui-pagination .main-page-pag-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.tui-pagination .main-page-selected,
+.tui-pagination strong {
+  color: var(--pure-white-color);
+  background: var(--main-accent-color);
+
+  cursor: default;
+}
+
+.tui-pagination .main-page-selected:hover {
+  background-color: var(--main-accent-color);
+}
+
+.tui-pagination .main-first-child,
+.tui-pagination .main-prev-is-ellip {
+  border-left: none;
+}
+
+.tui-pagination .main-last-child,
+.tui-pagination .main-next-is-ellip {
+  border-right: none;
+}
+
+.tui-pagination .main-prev-is-ellip,
+.tui-pagination .main-next-is-ellip {
+  overflow: hidden;
+  height: 26px;
+  padding: 0;
+  font-size: 0;
+  line-height: 26px;
+  white-space: nowrap;
+  font-weight: normal;
+  background: transparent;
+  border-radius: 5px;
+}

@@ -1,7 +1,16 @@
+section {
+  margin-bottom: 40px;
+  @include mq(tab) {
+    margin-bottom: 60px;
+  }
+}
+
 .gallery {
   max-width: 480px;
   padding-top: 20px;
+  margin-bottom: 40px;
   @include mq(tab) {
+    margin-bottom: 60px;
     padding-top: 59px;
     display: flex;
     flex-wrap: wrap;
@@ -97,6 +106,7 @@
     height: 20px;
     padding: 3px 12px;
     margin-left: 8px;
+    font-size: 14px;
   }
 }
 
