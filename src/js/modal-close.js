@@ -5,6 +5,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { definitionGenre } from './trends';
 import { addSelectedWatched } from './local-storage';
 import { addSelectedQueue } from './local-storage';
+import { initId } from './local-storage';
 
 const refs = {
     btnAddWatched: null,
@@ -15,6 +16,7 @@ const refs = {
 };
 
 async function onGalleryClick(e) {
+    
     const item = e.target.closest('.gallery_card');
     const idMovie = item.dataset.id;
     document.body.style.overflow = "hidden";
@@ -60,6 +62,7 @@ async function onGalleryClick(e) {
 
     refs.btnAddWatched.addEventListener('click', addSelectedWatched);
     refs.btnAddQueue.addEventListener('click', addSelectedQueue);
+    initId();
 }
 
 function closeModal() {
