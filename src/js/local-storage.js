@@ -1,3 +1,8 @@
+import axios from 'axios';
+import { fetchMovieBuId } from './fatch-movie-by-id';
+
+// --------локал сторедж-----------
+
 const STORAGE_WATCHED = 'watched-state';
 const STORAGE_QUEUE = 'queue-state';
 
@@ -5,6 +10,7 @@ const refs = {
     libraryWatched: document.querySelector('.header-library__btn.watched'),
     libraryQueue: document.querySelector('.header-library__btn.queue')
 };
+
 
 // initForm();
 
@@ -79,11 +85,15 @@ export function initId() {
     if (persistedFiltersQueue.includes(ImgId)) {
         btnQueue.classList.add('btn-add-active');
     }    
-
 }; 
 
 
+// --------бібліотека-----------
 
+// refs.libraryWatched.addEventListener('click', onWatchedClick);
 
+// async function onWatchedClick() {
+//     const response = await fetchMovieBuId(selectedWatched[0]);
+// } 
 
-
+// console.log(refs.libraryWatched);
