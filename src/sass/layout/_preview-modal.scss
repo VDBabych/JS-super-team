@@ -1,34 +1,86 @@
-//  srcset="./images/modal/lg-@1x.jpg 375w,
-//                 ./images/modal/lg-@2x.jpg 750w,
-//                 ./images/modal/md-@1x.jpg 264w,
-//                 ./images/modal/md-@2x.jpg 528w,
-//                 ./images/modal/sm-@1x.jpg 240w,
-//                 ./images/modal/sm-@2x.jpg 480w"
-//         sizes="(min-width: 1280px) 375px, (min-width: 768px) 264px, (min-width: 320px) 240px"
+
+@keyframes zoom {
+    0% {
+        transform: scale(0.2);
+        
+    }
+    50% {
+        transform: scale(1.2);
+        
+    }
+    100% {
+        transform: scale(1);
+        
+    }
+}
+
+@keyframes outzoom {
+    0% {
+        transform: scale(1);
+        
+    }
+    50% {
+        transform: scale(1.2);
+        
+    }
+    100% {
+        transform: scale(0.2);
+        
+    }
+}
+
+@keyframes fade {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0.753);
+    }
+}
+
+.btn-plus {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 500px;
+    left: 20px;
+    z-index: 220;
+}
+
+.btn-minus {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 600px;
+    left: 20px;
+    z-index: 220;
+}
 
 .backdrop {
     position: fixed;
-   
+    display: flex;
+    align-items:center;
+    justify-content: center;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.250);
-    transform: scale(1);
-    transition: transform 0.2s ease;
+    opacity: 1;
+    animation: fade 2s linear forwards;
+    transition: all 1s ease;
+    
+    
+   
 
     @media screen and (max-width: 767px) {
         overflow: scroll;
     }
 }
 
-
-
-  .is-hidden {
+.is-hidden {
     opacity: 0;
     visibility: hidden;
-    position: absolute;
-    transform: scale(0);
+    pointer-events: none;
 }
 
 
@@ -48,18 +100,22 @@
 
 .modal {
     position: absolute;
-    
+    animation: zoom 0.3s linear forwards;
     padding: 48px 20px 40px;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    // top: 20px;
+    // left: 50%;
+    // transform: translateX(-50%);
+    // transform-origin: center;
 
     min-width: 280px;
     width: 90%;
-
+    opacity: 1;
     font-weight: 500;
     font-family: 'Roboto';
     background-color: var(--pure-white-color);
+    transition: all 1s ease;
+
+    
 
     @media screen and (min-width: 480px) {
         width: 460px;
@@ -67,8 +123,8 @@
 
     @media screen and (min-width: 768px) {
         width: 704px;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        // top: 50%;
+        // transform: translate(-50%, -50%);
         display: flex;
         align-items: flex-start;
         padding: 40px 72px 40px 36px;
@@ -83,7 +139,7 @@
 }
 
 .modal__btn-close {
-    background: none;
+    background: transparent;
     border: none;
     position: absolute;
     top: 8px;
