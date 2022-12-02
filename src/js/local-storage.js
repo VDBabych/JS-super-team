@@ -1,36 +1,38 @@
-import { selectedWatched, selectedQueue } from './init-page-main';
 
+import { getWatched, getQueue } from './init-form';
 export const STORAGE_WATCHED = 'watched-state';
 export const STORAGE_QUEUE = 'queue-state';
 
 export function addSelectedWatched(e) {
-  const ImgSelecte = document.querySelector('.modal__img');
-  const ImgId = ImgSelecte.dataset.id;
+  const imgSelected = document.querySelector('.modal__img');
+  const imgId = imgSelected.dataset.id;
   const btnWatched = document.querySelector('.btn-add-watched');
+  let arrWatchedIds = getWatched();
 
-  if (selectedWatched.includes(ImgId)) {
-    selectedWatched.splice(selectedWatched.indexOf(ImgId), 1);
+  if (arrWatchedIds.includes(imgId)) {
+    arrWatchedIds.splice(arrWatchedIds.indexOf(imgId), 1);
     btnWatched.classList.remove('btn-add-active');
   } else {
-    selectedWatched.push(ImgId);
+    arrWatchedIds.push(imgId);
     btnWatched.classList.add('btn-add-active');
   }
 
-  localStorage.setItem(STORAGE_WATCHED, JSON.stringify(selectedWatched));
+  localStorage.setItem(STORAGE_WATCHED, JSON.stringify(arrWatchedIds));
 }
 
 export function addSelectedQueue(e) {
-  const ImgSelecte = document.querySelector('.modal__img');
-  const ImgId = ImgSelecte.dataset.id;
+  const imgSelected = document.querySelector('.modal__img');
+  const imgId = imgSelected.dataset.id;
   const btnQueue = document.querySelector('.btn-add-queue');
+  let arrQueueIds = getQueue();
 
-  if (selectedQueue.includes(ImgId)) {
-    selectedQueue.splice(selectedQueue.indexOf(ImgId), 1);
+  if (arrQueueIds.includes(imgId)) {
+    arrQueueIds.splice(arrQueueIds.indexOf(imgId), 1);
     btnQueue.classList.remove('btn-add-active');
   } else {
-    selectedQueue.push(ImgId);
+    arrQueueIds.push(imgId);
     btnQueue.classList.add('btn-add-active');
   }
 
-  localStorage.setItem(STORAGE_QUEUE, JSON.stringify(selectedQueue));
+  localStorage.setItem(STORAGE_QUEUE, JSON.stringify(arrQueueIds));
 }
