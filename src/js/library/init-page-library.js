@@ -8,4 +8,4 @@ refs.libraryQueue.addEventListener('click', onQueueClick);
 
 export let selectedWatched = [];
 export let selectedQueue = [];
-initForm();
+initForm(selectedWatched, selectedQueue);
