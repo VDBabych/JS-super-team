@@ -5,6 +5,9 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { addSelectedWatched } from './local-storage';
 import { addSelectedQueue } from './local-storage';
 import { initId } from './check-include-id';
+import { MovieAPI } from './movie-API';
+
+const movieApi = new MovieAPI();
 
 const refs = {
   btnAddWatched: null,
@@ -16,6 +19,19 @@ const refs = {
 let cardsElems = [];
 let index = null;
 
+function updateDataForModal(data) {
+  return {
+    ...data,
+    popularity: data.popularity.toFixed(0),
+    vote_average: data.vote_average.toFixed(1),
+    genres: data.genres
+      .map(({ name }) => {
+        return name;
+      })
+      .join(', '),
+  };
+}
+
 async function onGalleryClick(e) {
   const item = e.target.closest('.gallery_card');
 
@@ -25,26 +41,13 @@ async function onGalleryClick(e) {
 
   const idMovie = item.dataset.id;
   document.body.style.overflow = 'hidden';
-  document.body.style.paddingRight = '17px';
+  // document.body.style.paddingRight = '17px';
 
   // =========================Получаю єлемент и делаю разметку========================
   try {
-    const response = await fetchMovieBuId(idMovie);
-    const propertieMovie = {
-      ...response.data,
-      popularity: response.data.popularity.toFixed(0),
-      vote_average: response.data.vote_average.toFixed(1),
-      genres: response.data.genres
-        .map(({ name }) => {
-          return name;
-        })
-        .join(', '),
-    };
-
-    refs.backdropEl.insertAdjacentHTML(
-      'beforeend',
-      createModalMurkupById(propertieMovie)
-    );
+    const data = await movieApi.getMovieById(idMovie);
+    const propertieMovie = updateDataForModal(data);
+    refs.backdropEl.insertAdjacentHTML('beforeend', createModalMurkupById(propertieMovie));
 
     getElementsUntilOpenModals();
   } catch (error) {
@@ -53,69 +56,108 @@ async function onGalleryClick(e) {
   }
 
   refs.backdropEl.classList.remove('is-hidden');
+  document.addEventListener('keydown', onEscDown);
 
-  makeEventListenerUntilOpenModal();
+  // makeEventListenerUntilOpenModal();
 
   initId();
 
-    // ========================= Слайдер модалки =======================================
+  
    
    
-    const cardsElems = document.querySelectorAll('.gallery_card');
+    // cardsElems = document.querySelectorAll('.gallery_card');
     
-    let index = [...cardsElems].findIndex((itemLi) => {
-        return itemLi === item;
-    });
+    // index = [...cardsElems].findIndex((itemLi) => {
+    //     return itemLi === item;
+    // });
 
-    const btnPlus = document.querySelector('.btn-plus');
-    const btnMinus = document.querySelector('.btn-minus');
-    
-   
-   
-    btnPlus.addEventListener('click', (e) => {
-        if (e.target.nodeName !== 'BUTTON') {
-            return;
-        }
 
-        index += 1;
-        console.log(index);
-        if (index > cardsElems.length - 1) {
-            index = 0;
-        }
-   
-    const nextIdOfElements = cardsElems[index].dataset.id;
-        
-    getFetchCardById(nextIdOfElements, getElementsUntilOpenModals);
-    makeEventListenerUntilOpenModal();
-        
-    initId();
-    });
-    
-    btnMinus.addEventListener('click', (e) => {
-        if (e.target.nodeName !== 'BUTTON') {
-            return;
-        }
-
-        index -= 1;
-        console.log(index);
-        if (index < 0) {
-            index = cardsElems.length - 1;
-        }
-       
-        const nextIdOfElements = cardsElems[index].dataset.id;
-
-        
-        getFetchCardById(nextIdOfElements, getElementsUntilOpenModals);
-        
-        
-        
-        initId();
-    });
-
-    
-// =========================== / Слайдер Модалки ======================================
 }
 
+// =====================================NEW CODE
+
+refs.backdropEl.addEventListener('click', onBackdropClick);
+
+function onBackdropClick(e) {
+  
+  
+
+  if (e.target.classList.contains('backdrop')) {
+    console.log('backdrop close');
+    closeModal();
+  }
+
+  if (e.target.classList.contains('btn-add-watched')) {
+    console.log('btn-wached');
+    addSelectedWatched();
+  }
+
+  if (e.target.classList.contains('btn-add-queue')) {
+    console.log('btn-queue');
+    addSelectedQueue();
+  }
+  
+  if (e.target.closest('.modal__btn-close')) {
+    console.log('close btn');
+    closeModal();
+  }
+
+  if (e.target.classList.contains('btn-plus')) {
+    console.log('btnPlus');
+  }
+
+  if (e.target.classList.contains('btn-minus')) {
+    console.log('btnMinus');
+  }
+}
+// ======================================/NEW CODE
+
+
+
+
+
+const btnPlus = document.querySelector('.btn-plus');
+const btnMinus = document.querySelector('.btn-minus');
+
+//  btnMinus.addEventListener('click', (e) => {
+//         if (e.target.nodeName !== 'BUTTON') {
+//             return;
+//         }
+
+//         index -= 1;
+//         console.log(index);
+//         if (index < 0) {
+//             index = cardsElems.length - 1;
+//         }
+       
+//         const nextIdOfElements = cardsElems[index].dataset.id;
+
+        
+//         getFetchCardById(nextIdOfElements, getElementsUntilOpenModals);
+        
+        
+        
+//         initId();
+//     });
+
+//  btnPlus.addEventListener('click', (e) => {
+//         if (e.target.nodeName !== 'BUTTON') {
+//             return;
+//         }
+
+//         index += 1;
+//         console.log(index);
+//         if (index > cardsElems.length - 1) {
+//             index = 0;
+//         }
+   
+//     const nextIdOfElements = cardsElems[index].dataset.id;
+        
+//     getFetchCardById(nextIdOfElements, getElementsUntilOpenModals);
+//     makeEventListenerUntilOpenModal();
+        
+//     initId();
+//     });
 
 // ============================Функции=================================================
 
@@ -123,11 +165,11 @@ function closeModal() {
   console.log('im close');
   document.body.style.paddingRight = '0';
   document.removeEventListener('keydown', onEscDown);
-  refs.backdropEl.removeEventListener('click', onBackdropClick);
-  refs.btnCloseEl.removeEventListener('click', closeModal);
+  // refs.backdropEl.removeEventListener('click', onBackdropClick);
+  // refs.btnCloseEl.removeEventListener('click', closeModal);
   refs.backdropEl.classList.add('is-hidden');
-  refs.btnAddWatched.removeEventListener('click', addSelectedWatched);
-  refs.btnAddQueue.removeEventListener('click', addSelectedQueue);
+  // refs.btnAddWatched.removeEventListener('click', addSelectedWatched);
+  // refs.btnAddQueue.removeEventListener('click', addSelectedQueue);
   document.body.style.overflow = '';
   refs.backdropEl.querySelector('.modal').remove();
 }
@@ -138,12 +180,12 @@ function onEscDown(e) {
   }
 }
 
-function onBackdropClick(e) {
-  console.log(e.target);
-  if (e.target.classList.contains('backdrop')) {
-    closeModal();
-  }
-}
+// function onBackdropClick(e) {
+//   console.log(e.target);
+//   if (e.target.classList.contains('backdrop')) {
+//     closeModal();
+//   }
+// }
 
 function getElementsUntilOpenModals() {
   refs.btnCloseEl = document.querySelector('.modal__btn-close');
@@ -154,7 +196,7 @@ function getElementsUntilOpenModals() {
 function makeEventListenerUntilOpenModal() {
   refs.btnCloseEl.addEventListener('click', closeModal);
   console.log('hello');
-  document.addEventListener('keydown', onEscDown);
+  
   refs.backdropEl.addEventListener('click', onBackdropClick);
   refs.btnAddWatched.addEventListener('click', addSelectedWatched);
   refs.btnAddQueue.addEventListener('click', addSelectedQueue);
