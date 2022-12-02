@@ -39,6 +39,7 @@ async function contentLoad() {
   refs.spinner.classList.remove('hidden');
   try {
     const arrCards = await fetchMovieCard();
+    console.log(arrCards.results);
     await fetchGenreIds();
     appendCardMarkup(arrCards);
     refs.spinner.classList.add('hidden');
