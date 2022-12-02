@@ -1,48 +1,41 @@
-import axios from 'axios';
-import {
-  appendCardMarkup,
-  isSubmitActiv,
-  options,
-  trendPagination,
-} from './trends';
+import { pagination } from './pagination';
+import { appendCardMarkup } from './appendCardMarkup';
 import { refs } from './refs-homepage';
 import image from '../images/search-cat/crying_cat@1x.png';
+import { MovieAPI } from './movie-API';
+import { Notify } from 'notiflix';
+
+const movieAPI = new MovieAPI();
+
 export let isSubmitActiv = false;
 
-export async function getFilmCardsBySearch(page) {
+export async function getFilmCardsBySearch(page = 1) {
   refs.gallery.innerHTML = '';
   refs.notifySearchFailure.innerHTML = '';
 
   try {
-    const searchedFilmsArr = await fetchMovieBySearch(page);
-    trendPagination.setTotalItems(searchedFilmsArr.total_results);
-    appendCardMarkup(searchedFilmsArr);
-    const { total_results } = searchedFilmsArr;
-    console.log(total_results);
+    const searchedFilmsArr = await movieAPI.getSearchMovie(page);
+    const totalResults = movieAPI.getTotalResults();
+    appendCardMarkup(searchedFilmsArr, refs.gallery);
 
-    if (total_results === 0) {
+    if (totalResults === 0) {
+      refs.container.style.cssText = 'display: none';
       refs.notifySearchFailure.innerHTML =
         'Search result not successful. Enter the correct movie name';
       refs.gallery.innerHTML = `<img src="${image}" alt="crying cat" width="294px" height="389px" style="margin: auto">`;
-      return;
+      return totalResults;
     }
+    return totalResults;
   } catch (err) {
-    console.log(err);
+    Notify.failure(err.message);
   }
 }
 
-async function fetchMovieBySearch(page) {
-  const searchQuery = refs.searchForm.elements[0].value;
-  const res = await axios.get(
-    `https://api.themoviedb.org/3/search/movie?api_key=9cda16d98a6e510af2decf0d66e8e7d5&language=en-US&query=${searchQuery}&page=${page}`
-  );
-  return res.data;
-}
-
-refs.searchForm.addEventListener('submit', event => {
+export async function onFormSubmit(event) {
   event.preventDefault();
-  trendPagination.reset();
-
-  getFilmCardsBySearch(options.page);
+  refs.container.removeAttribute('style');
+  movieAPI.setQuery(event.target[0].value.trim());
+  const totalResults = await getFilmCardsBySearch();
+  pagination.reset(totalResults);
   isSubmitActiv = true;
-});
+}
