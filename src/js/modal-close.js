@@ -1,5 +1,4 @@
 'use strict';
-import { fetchMovieBuId } from './fatch-movie-by-id';
 import createModalMurkupById from '../tamlates/modal.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { addSelectedWatched } from './local-storage';
@@ -16,6 +15,7 @@ const refs = {
   backdropEl: document.querySelector('.backdrop'),
   galleryEl: document.querySelector('.gallery'),
 };
+
 let cardsElems = [];
 let index = null;
 
@@ -41,15 +41,11 @@ async function onGalleryClick(e) {
 
   const idMovie = item.dataset.id;
   document.body.style.overflow = 'hidden';
-  // document.body.style.paddingRight = '17px';
 
-  // =========================Получаю єлемент и делаю разметку========================
   try {
     const data = await movieApi.getMovieById(idMovie);
     const propertieMovie = updateDataForModal(data);
     refs.backdropEl.insertAdjacentHTML('beforeend', createModalMurkupById(propertieMovie));
-
-    getElementsUntilOpenModals();
   } catch (error) {
     Notify.failure(error.message);
     return;
@@ -58,23 +54,13 @@ async function onGalleryClick(e) {
   refs.backdropEl.classList.remove('is-hidden');
   document.addEventListener('keydown', onEscDown);
 
-  // makeEventListenerUntilOpenModal();
-
   initId();
-
-  
-   
-   
-    // cardsElems = document.querySelectorAll('.gallery_card');
+  cardsElems = document.querySelectorAll('.gallery_card');
     
-    // index = [...cardsElems].findIndex((itemLi) => {
-    //     return itemLi === item;
-    // });
-
-
+  index = [...cardsElems].findIndex((itemLi) => {
+    return itemLi === item;
+  });
 }
-
-// =====================================NEW CODE
 
 refs.backdropEl.addEventListener('click', onBackdropClick);
 
@@ -103,75 +89,46 @@ function onBackdropClick(e) {
   }
 
   if (e.target.classList.contains('btn-plus')) {
-    console.log('btnPlus');
+    btnPlus();
   }
 
   if (e.target.classList.contains('btn-minus')) {
     console.log('btnMinus');
+    onBtnMinus();
   }
 }
-// ======================================/NEW CODE
 
-
-
-
-
-const btnPlus = document.querySelector('.btn-plus');
-const btnMinus = document.querySelector('.btn-minus');
-
-//  btnMinus.addEventListener('click', (e) => {
-//         if (e.target.nodeName !== 'BUTTON') {
-//             return;
-//         }
-
-//         index -= 1;
-//         console.log(index);
-//         if (index < 0) {
-//             index = cardsElems.length - 1;
-//         }
-       
-//         const nextIdOfElements = cardsElems[index].dataset.id;
-
-        
-//         getFetchCardById(nextIdOfElements, getElementsUntilOpenModals);
-        
-        
-        
-//         initId();
-//     });
-
-//  btnPlus.addEventListener('click', (e) => {
-//         if (e.target.nodeName !== 'BUTTON') {
-//             return;
-//         }
-
-//         index += 1;
-//         console.log(index);
-//         if (index > cardsElems.length - 1) {
-//             index = 0;
-//         }
+ function btnPlus() {
+    index += 1;
+    console.log(index);
+    if (index > cardsElems.length - 1) {
+        index = 0;
+    }
    
-//     const nextIdOfElements = cardsElems[index].dataset.id;
+    const nextIdOfElements = cardsElems[index].dataset.id;
         
-//     getFetchCardById(nextIdOfElements, getElementsUntilOpenModals);
-//     makeEventListenerUntilOpenModal();
-        
-//     initId();
-//     });
+    getFetchCardById(nextIdOfElements);
+}
 
-// ============================Функции=================================================
+function onBtnMinus() {
+  index -= 1;
+  console.log(index);
+  if (index < 0) {
+      index = cardsElems.length - 1;
+  }
+
+  const nextIdOfElements = cardsElems[index].dataset.id;
+
+  getFetchCardById(nextIdOfElements);
+}
 
 function closeModal() {
   console.log('im close');
+  refs.backdropEl.querySelector('.modal').remove();
   document.body.style.paddingRight = '0';
   document.removeEventListener('keydown', onEscDown);
-  // refs.backdropEl.removeEventListener('click', onBackdropClick);
-  // refs.btnCloseEl.removeEventListener('click', closeModal);
   refs.backdropEl.classList.add('is-hidden');
-  // refs.btnAddWatched.removeEventListener('click', addSelectedWatched);
-  // refs.btnAddQueue.removeEventListener('click', addSelectedQueue);
   document.body.style.overflow = '';
-  refs.backdropEl.querySelector('.modal').remove();
 }
 
 function onEscDown(e) {
@@ -180,54 +137,20 @@ function onEscDown(e) {
   }
 }
 
-// function onBackdropClick(e) {
-//   console.log(e.target);
-//   if (e.target.classList.contains('backdrop')) {
-//     closeModal();
-//   }
-// }
-
-function getElementsUntilOpenModals() {
-  refs.btnCloseEl = document.querySelector('.modal__btn-close');
-  refs.btnAddWatched = document.querySelector('.btn-add-watched');
-  refs.btnAddQueue = document.querySelector('.btn-add-queue');
-}
-
-function makeEventListenerUntilOpenModal() {
-  refs.btnCloseEl.addEventListener('click', closeModal);
-  console.log('hello');
-  
-  refs.backdropEl.addEventListener('click', onBackdropClick);
-  refs.btnAddWatched.addEventListener('click', addSelectedWatched);
-  refs.btnAddQueue.addEventListener('click', addSelectedQueue);
-}
-
-async function getFetchCardById(id, addEl) {
+async function getFetchCardById(id) {
   try {
-    const response = await fetchMovieBuId(id);
-    const propertieMovie = {
-      ...response.data,
-      popularity: response.data.popularity.toFixed(0),
-      vote_average: response.data.vote_average.toFixed(1),
-      genres: response.data.genres
-        .map(({ name }) => {
-          return name;
-        })
-        .join(', '),
-    };
-
+    const data = await movieApi.getMovieById(id);
+    const propertieMovie = updateDataForModal(data);
+    
     refs.backdropEl.querySelector('.modal').remove();
-    refs.backdropEl.insertAdjacentHTML(
-      'beforeend',
-      createModalMurkupById(propertieMovie)
-    );
-    addEl();
-    makeEventListenerUntilOpenModal();
+    refs.backdropEl.insertAdjacentHTML('beforeend', createModalMurkupById(propertieMovie));
+    initId();
+    
   } catch (error) {
     Notify.failure(error.message);
     return;
   }
-  refs.backdropEl.classList.remove('is-hidden');
+  
 }
 
 refs.galleryEl.addEventListener('click', onGalleryClick);
