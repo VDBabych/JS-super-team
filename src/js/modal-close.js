@@ -13,6 +13,8 @@ const refs = {
   backdropEl: document.querySelector('.backdrop'),
   galleryEl: document.querySelector('.gallery'),
 };
+let cardsElems = [];
+let index = null;
 
 async function onGalleryClick(e) {
   const item = e.target.closest('.gallery_card');
@@ -56,56 +58,64 @@ async function onGalleryClick(e) {
 
   initId();
 
-  // ========================= Слайдер модалки =======================================
+    // ========================= Слайдер модалки =======================================
+   
+   
+    const cardsElems = document.querySelectorAll('.gallery_card');
+    
+    let index = [...cardsElems].findIndex((itemLi) => {
+        return itemLi === item;
+    });
 
-  const cardsElems = document.querySelectorAll('.gallery_card');
+    const btnPlus = document.querySelector('.btn-plus');
+    const btnMinus = document.querySelector('.btn-minus');
+    
+   
+   
+    btnPlus.addEventListener('click', (e) => {
+        if (e.target.nodeName !== 'BUTTON') {
+            return;
+        }
 
-  let index = [...cardsElems].findIndex(itemLi => {
-    return itemLi === item;
-  });
-
-  const btnPlus = document.querySelector('.btn-plus');
-  const btnMinus = document.querySelector('.btn-minus');
-
-  btnPlus.addEventListener('click', e => {
-    if (e.target.nodeName !== 'BUTTON') {
-      return;
-    }
-
-    index += 1;
-    console.log(index);
-    if (index > cardsElems.length - 1) {
-      index = 0;
-    }
-
+        index += 1;
+        console.log(index);
+        if (index > cardsElems.length - 1) {
+            index = 0;
+        }
+   
     const nextIdOfElements = cardsElems[index].dataset.id;
-
+        
     getFetchCardById(nextIdOfElements, getElementsUntilOpenModals);
     makeEventListenerUntilOpenModal();
-
+        
     initId();
-  });
+    });
+    
+    btnMinus.addEventListener('click', (e) => {
+        if (e.target.nodeName !== 'BUTTON') {
+            return;
+        }
 
-  btnMinus.addEventListener('click', e => {
-    if (e.target.nodeName !== 'BUTTON') {
-      return;
-    }
+        index -= 1;
+        console.log(index);
+        if (index < 0) {
+            index = cardsElems.length - 1;
+        }
+       
+        const nextIdOfElements = cardsElems[index].dataset.id;
 
-    index -= 1;
-    console.log(index);
-    if (index < 0) {
-      index = cardsElems.length - 1;
-    }
+        
+        getFetchCardById(nextIdOfElements, getElementsUntilOpenModals);
+        
+        
+        
+        initId();
+    });
 
-    const nextIdOfElements = cardsElems[index].dataset.id;
-
-    getFetchCardById(nextIdOfElements, getElementsUntilOpenModals);
-
-    initId();
-  });
-
-  // =========================== / Слайдер Модалки ======================================
+    
+// =========================== / Слайдер Модалки ======================================
 }
+
 
 // ============================Функции=================================================
 
