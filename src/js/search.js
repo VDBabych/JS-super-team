@@ -5,7 +5,7 @@ import image from '../images/search-cat/crying_cat@1x.png';
 import { MovieAPI } from './movie-API';
 import { Notify } from 'notiflix';
 
-const movieAPI = new MovieAPI;
+const movieAPI = new MovieAPI();
 
 export let isSubmitActiv = false;
 
@@ -25,17 +25,16 @@ export async function getFilmCardsBySearch(page = 1) {
       refs.gallery.innerHTML = `<img src="${image}" alt="crying cat" width="294px" height="389px" style="margin: auto">`;
       return totalResults;
     }
-    return totalResults
+    return totalResults;
   } catch (err) {
-    Notify.failure(err.message)
+    Notify.failure(err.message);
   }
-  
 }
 
 export async function onFormSubmit(event) {
   event.preventDefault();
-  refs.container.removeAttribute('style')
-  movieAPI.setQuery(event.target[0].value.trim())
+  refs.container.removeAttribute('style');
+  movieAPI.setQuery(event.target[0].value.trim());
   const totalResults = await getFilmCardsBySearch();
   pagination.reset(totalResults);
   isSubmitActiv = true;
