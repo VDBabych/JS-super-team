@@ -1,10 +1,10 @@
 import { STORAGE_WATCHED, STORAGE_QUEUE } from './local-storage';
-
+import { getWatched, getQueue } from './init-form';
 export function initId() {
-  let persistedFiltersQueue = JSON.parse(localStorage.getItem(STORAGE_QUEUE));
-  let persistedFiltersWatched = JSON.parse(
-    localStorage.getItem(STORAGE_WATCHED)
-  );
+  let persistedFiltersQueue = getQueue();
+
+  let persistedFiltersWatched = getWatched();
+
   const ImgSelecte = document.querySelector('.modal__img');
   const btnWatched = document.querySelector('.btn-add-watched');
   const btnQueue = document.querySelector('.btn-add-queue');
