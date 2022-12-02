@@ -14,6 +14,8 @@ const refs = {
     galleryEl: document.querySelector('.gallery'),
     
 };
+let cardsElems = [];
+let index = null;
 
 async function onGalleryClick(e) {
     
@@ -56,37 +58,21 @@ async function onGalleryClick(e) {
     // ========================= Слайдер модалки =======================================
    
    
-    const cardsElems = document.querySelectorAll('.gallery_card');
     
-    let index = [...cardsElems].findIndex((itemLi) => {
+    cardsElems = document.querySelectorAll('.gallery_card');
+    index = [...cardsElems].findIndex((itemLi) => {
         return itemLi === item;
     });
 
-    const btnPlus = document.querySelector('.btn-plus');
-    const btnMinus = document.querySelector('.btn-minus');
     
-   
-   
-    btnPlus.addEventListener('click', (e) => {
-        if (e.target.nodeName !== 'BUTTON') {
-            return;
-        }
+    
+// =========================== / Слайдер Модалки ======================================
+}
 
-        index += 1;
-        console.log(index);
-        if (index > cardsElems.length - 1) {
-            index = 0;
-        }
-   
-    const nextIdOfElements = cardsElems[index].dataset.id;
-        
-    getFetchCardById(nextIdOfElements, getElementsUntilOpenModals);
-    makeEventListenerUntilOpenModal();
-        
-    initId();
-    });
-    
-    btnMinus.addEventListener('click', (e) => {
+const btnPlus = document.querySelector('.btn-plus');
+const btnMinus = document.querySelector('.btn-minus');
+
+ btnMinus.addEventListener('click', (e) => {
         if (e.target.nodeName !== 'BUTTON') {
             return;
         }
@@ -105,12 +91,26 @@ async function onGalleryClick(e) {
         
         
         initId();
-    });
-
+ });
     
-// =========================== / Слайдер Модалки ======================================
-}
+ btnPlus.addEventListener('click', (e) => {
+        if (e.target.nodeName !== 'BUTTON') {
+            return;
+        }
 
+        index += 1;
+        console.log(index);
+        if (index > cardsElems.length - 1) {
+            index = 0;
+        }
+   
+    const nextIdOfElements = cardsElems[index].dataset.id;
+        
+    getFetchCardById(nextIdOfElements, getElementsUntilOpenModals);
+    makeEventListenerUntilOpenModal();
+        
+    initId();
+    });
 
 // ============================Функции=================================================
 
