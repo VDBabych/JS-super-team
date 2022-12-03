@@ -1,7 +1,7 @@
 {{#each this}}
 <li class="gallery_card" data-id="{{this.id}}">
       <div class="div-gallery_img">
-        <img src="https://image.tmdb.org/t/p/w500{{this.poster_path}}" alt='{{this.title}}' class="gallery_img"/>
+        <img src="{{this.poster_path}}" alt='{{this.title}}' class="gallery_img"/>
         <div class="card_overlay"><span>{{this.overview}}</span>
         </div>
       </div>
