@@ -16,8 +16,11 @@ const modalPagination = new ModalPagination();
 refs.galleryEl.addEventListener('click', onGalleryClick);
 
 function updateDataForModal(data) {
+  console.log(data);
   return {
     ...data,
+    poster_path: data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
+                                  :  `https://mobiltelefon.ru/photo/february21/05/nothing_naznachila_anons_na_sleduuschuu_nedelu_i_otozvala_ego_picture2_0_resize.jpg`,
     popularity: data.popularity.toFixed(0),
     vote_average: data.vote_average.toFixed(1),
     genres: data.genres
