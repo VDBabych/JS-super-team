@@ -6,21 +6,14 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { addSelectedWatched, addSelectedQueue } from './local-storage';
 import { initId } from './check-include-id';
 import { MovieAPI } from './movie-API';
+import { ModalPagination } from './moda-pagination';
+import { refs } from './refs-homepage';
 
 const movieApi = new MovieAPI();
 
-const refs = {
-  btnAddWatched: null,
-  btnAddQueue: null,
-  btnCloseEl: null,
-  // btnTrailer: null,
-  backdropEl: document.querySelector('.backdrop'),
-  galleryEl: document.querySelector('.gallery'),
-};
+const modalPagination = new ModalPagination();
 
-let cardsElems = [];
-let index = null;
-let modalTrailer;
+refs.galleryEl.addEventListener('click', onGalleryClick);
 
 function updateDataForModal(data) {
   return {
@@ -37,7 +30,6 @@ function updateDataForModal(data) {
 
 async function onGalleryClick(e) {
   const item = e.target.closest('.gallery_card');
-
   if (!item) {
     return;
   }
@@ -61,30 +53,23 @@ async function onGalleryClick(e) {
   document.addEventListener('keydown', onEscDown);
 
   initId();
-  cardsElems = document.querySelectorAll('.gallery_card');
 
-  index = [...cardsElems].findIndex(itemLi => {
-    return itemLi === item;
-  });
+  modalPagination.setIdArr('.gallery_card');
+  modalPagination.setIndxOfId(item.dataset.id);
 }
 
 refs.backdropEl.addEventListener('click', onBackdropClick);
 
 async function onBackdropClick(e) {
-  console.log(e.target);
   if (e.target.classList.contains('backdrop')) {
-    console.log('backdrop close');
-
     closeModal();
   }
 
   if (e.target.classList.contains('btn-add-watched')) {
-    console.log('btn-wached');
     addSelectedWatched();
   }
 
   if (e.target.classList.contains('btn-add-queue')) {
-    console.log('btn-queue');
     addSelectedQueue();
   }
   if (e.target.classList.contains('btn-trailer')) {
@@ -104,55 +89,23 @@ async function onBackdropClick(e) {
   }
 
   if (e.target.closest('.modal__btn-close')) {
-    console.log('close btn');
-
     closeModal();
   }
 
   if (e.target.classList.contains('btn-plus')) {
-    btnPlus();
+    getFetchCardById(modalPagination.getNextId());
   }
 
   if (e.target.classList.contains('btn-minus')) {
-    console.log('btnMinus');
-    onBtnMinus();
+    getFetchCardById(modalPagination.getPreviousId());
   }
 }
 async function onBtnTrailer() {
   const imgSelected = document.querySelector('.modal__img');
   const idMovie = imgSelected.dataset.id;
-
-  await fetchAndCreateTrailer(idMovie);
 }
-function btnPlus() {
-  index += 1;
-  console.log(index);
-  if (index > cardsElems.length - 1) {
-    index = 0;
-  }
-
-  const nextIdOfElements = cardsElems[index].dataset.id;
-
-  getFetchCardById(nextIdOfElements);
-}
-
-function onBtnMinus() {
-  index -= 1;
-  console.log(index);
-  if (index < 0) {
-    index = cardsElems.length - 1;
-  }
-
-  const nextIdOfElements = cardsElems[index].dataset.id;
-
-  getFetchCardById(nextIdOfElements);
-}
-
 function closeModal() {
-  console.log('im close');
-  modalTrailer.close();
   refs.backdropEl.querySelector('.modal').remove();
-  document.body.style.paddingRight = '0';
   document.removeEventListener('keydown', onEscDown);
   refs.backdropEl.classList.add('is-hidden');
   document.body.style.overflow = '';
