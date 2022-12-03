@@ -1,285 +1,275 @@
-
 @keyframes zoom {
-    0% {
-        transform: scale(0.2);
-        
-    }
-    50% {
-        transform: scale(1.2);
-        
-    }
-    100% {
-        transform: scale(1);
-        
-    }
+  0% {
+    transform: scale(0.2);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes outzoom {
-    0% {
-        transform: scale(1);
-        
-    }
-    50% {
-        transform: scale(1.2);
-        
-    }
-    100% {
-        transform: scale(0.2);
-        
-    }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(0.2);
+  }
 }
 
 @keyframes fade {
-    from {
-        background-color: rgba(0, 0, 0, 0);
-    }
-    to {
-        background-color: rgba(0, 0, 0, 0.753);
-    }
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.753);
+  }
 }
 
 .btn-plus {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 500px;
-    left: 20px;
-    z-index: 220;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 500px;
+  left: 20px;
+  z-index: 220;
 }
 
 .btn-minus {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    top: 600px;
-    left: 20px;
-    z-index: 220;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 600px;
+  left: 20px;
+  z-index: 220;
 }
 
 .backdrop {
-    position: fixed;
-    display: flex;
-    align-items:center;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100%;
-    opacity: 1;
-    animation: fade 2s linear forwards;
-    transition: all 1s ease;
-    
-    
-   
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  opacity: 1;
+  animation: fade 2s linear forwards;
+  transition: all 1s ease;
 
-    @media screen and (max-width: 767px) {
-        overflow: scroll;
-    }
+  @media screen and (max-width: 767px) {
+    overflow: scroll;
+  }
 }
 
 .is-hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
-
-
 .modal__img {
-    border-radius: 5px;
-    width: 240px;
+  border-radius: 5px;
+  width: 240px;
 
-    @media screen and (min-width: 768px) {
-        width: 264px;
-    }
+  @media screen and (min-width: 768px) {
+    width: 264px;
+  }
 
-    @media screen and (min-width: 1280px) {
-        width: 375px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: 375px;
+  }
 }
 
 .modal {
-    position: absolute;
-    animation: zoom 0.3s linear forwards;
-    padding: 48px 20px 40px;
-    // top: 20px;
-    // left: 50%;
-    // transform: translateX(-50%);
-    // transform-origin: center;
+  position: absolute;
+  animation: zoom 0.3s linear forwards;
+  padding: 48px 20px 40px;
+  // top: 20px;
+  // left: 50%;
+  // transform: translateX(-50%);
+  // transform-origin: center;
 
-    min-width: 280px;
-    width: 90%;
-    opacity: 1;
-    font-weight: 500;
-    font-family: 'Roboto';
-    background-color: var(--pure-white-color);
-    transition: all 1s ease;
+  min-width: 280px;
+  width: 90%;
+  opacity: 1;
+  font-weight: 500;
+  font-family: 'Roboto';
+  background-color: var(--pure-white-color);
+  transition: all 1s ease;
 
-    
+  @media screen and (min-width: 480px) {
+    width: 460px;
+  }
 
-    @media screen and (min-width: 480px) {
-        width: 460px;
-    }
+  @media screen and (min-width: 768px) {
+    width: 704px;
+    // top: 50%;
+    // transform: translate(-50%, -50%);
+    display: flex;
+    align-items: flex-start;
+    padding: 40px 72px 40px 36px;
+    gap: 68px;
+  }
 
-    @media screen and (min-width: 768px) {
-        width: 704px;
-        // top: 50%;
-        // transform: translate(-50%, -50%);
-        display: flex;
-        align-items: flex-start;
-        padding: 40px 72px 40px 36px;
-        gap: 68px;
-    }
-
-    @media screen and (min-width: 1280px) {
-        width: 806px;
-        padding: 40px 12px;
-        gap: 16px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: 806px;
+    padding: 40px 12px;
+    gap: 16px;
+  }
 }
 
 .modal__btn-close {
-    background: transparent;
-    border: none;
-    position: absolute;
-    top: 8px;
-    right: 8px;
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 
 .modal__img {
-    margin: 0 auto;
+  margin: 0 auto;
 
-    @media screen and (min-width: 768px) {
-        margin: 0;
-        height: auto;
-    }
+  @media screen and (min-width: 768px) {
+    margin: 0;
+    height: auto;
+  }
 }
 
 .modal__wrap-info {
-    margin-top: 20px;
+  margin-top: 20px;
 
-     @media screen and (min-width: 768px) {
-        margin: 0;
-    }
+  @media screen and (min-width: 768px) {
+    margin: 0;
+  }
 }
 
 .modal__title {
-    font-weight: 500;
-    font-size: 20px;
-    line-height: calc(23/20);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: calc(23 / 20);
 
-    @media screen and (min-width: 768px) {
-        font-size: 30px;
-    }
+  @media screen and (min-width: 768px) {
+    font-size: 30px;
+  }
 }
 
 .modal__wrap-descr {
-    display: flex;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .modal__wrap-caption {
-    margin-right: 39px;
+  margin-right: 39px;
 
-    @media screen and (min-width: 768px) {
-        margin-right: 80px;
-    }
+  @media screen and (min-width: 768px) {
+    margin-right: 80px;
+  }
 }
 
 .modal__caption {
-    line-height: calc(16/12);
+  line-height: calc(16 / 12);
 
-    color: #8C8C8C;
+  color: #8c8c8c;
 }
 .modal__caption:not(:last-child) {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .modal__value {
-    color: #000000;
+  color: #000000;
 }
 
 .orig-title {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .genres {
-    width: 100px;
+  width: 100px;
 }
 .modal__value .actent-color {
-    display: inline-block;
-    background-color: var(--main-accent-color);
-    color: var(--pure-white-color);
-    padding: 1px 10px;
-    line-height: calc(14/12);
-    border-radius: 5px;
+  display: inline-block;
+  background-color: var(--main-accent-color);
+  color: var(--pure-white-color);
+  padding: 1px 10px;
+  line-height: calc(14 / 12);
+  border-radius: 5px;
 }
 .modal__value:not(:last-child) {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .value-flex {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .modal__about {
-    font-weight: 500;
-    margin-bottom: 8px;
+  font-weight: 500;
+  margin-bottom: 8px;
 }
 
 .modal__text {
-    line-height: calc(20/12);
+  line-height: calc(20 / 12);
 }
 
 .wrap-btn {
-    display: flex;
-    margin-top: 20px;
-    gap: 20px;
+  display: flex;
+  margin-top: 20px;
+  gap: 20px;
 }
 
 .btn-add-watched,
-.btn-add-queue {
-    display: block;
-    width: 110px;
-    min-height: 44px;
-    
+.btn-add-queue,
+.btn-trailer {
+  display: block;
+  //   width: 110px;
+  width: calc((100% - 40px) / 3);
+  min-height: 44px;
 
-    font-family: 'Roboto';
+  font-family: 'Roboto';
 
-    font-weight: 500;
-    font-size: 12px;
-    line-height: calc(16/12);
-    text-transform: uppercase;
-    border-radius: 5px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: calc(16 / 12);
+  text-transform: uppercase;
+  border-radius: 5px;
 
-    @media screen and (min-width: 768px) {
-        width: 125px;
-    }
+  @media screen and (min-width: 768px) {
+    width: calc((100% - 40px) / 3);
+  }
 
-     @media screen and (min-width: 1280px) {
-        width: 136px;
-    }
+  @media screen and (min-width: 1280px) {
+    width: calc((100% - 40px) / 3);
+  }
 }
 
-
-
-.btn-add-watched, .btn-add-queue {
-    border: 1px solid black;
-    background-color: var(--pure-white-color);
+.btn-add-watched,
+.btn-add-queue,
+.btn-trailer {
+  border: 1px solid black;
+  background-color: var(--pure-white-color);
 }
-
+.btn-trailer {
+  background-color: var(--main-accent-color);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
+  color: var(--pure-white-color);
+}
 .btn-add-active {
-    background-color: var(--main-accent-color);
-    border: none;
-    color: var(--pure-white-color);
+  font-weight: 500;
+  background-color: var(--main-accent-color);
+  border: none;
+  color: var(--pure-white-color);
 }
 
 .modal-icon-close {
-    fill: #000000;
+  fill: #000000;
 }
 
 // ===============================================================================
-
