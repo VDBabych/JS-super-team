@@ -5,19 +5,14 @@ import { addSelectedWatched } from './local-storage';
 import { addSelectedQueue } from './local-storage';
 import { initId } from './check-include-id';
 import { MovieAPI } from './movie-API';
+import { ModalPagination } from './moda-pagination';
+import { refs } from './refs-homepage';
 
 const movieApi = new MovieAPI();
 
-const refs = {
-  btnAddWatched: null,
-  btnAddQueue: null,
-  btnCloseEl: null,
-  backdropEl: document.querySelector('.backdrop'),
-  galleryEl: document.querySelector('.gallery'),
-};
+const modalPagination = new ModalPagination();
 
-let cardsElems = [];
-let index = null;
+refs.galleryEl.addEventListener('click', onGalleryClick);
 
 function updateDataForModal(data) {
   return {
@@ -34,7 +29,6 @@ function updateDataForModal(data) {
 
 async function onGalleryClick(e) {
   const item = e.target.closest('.gallery_card');
-
   if (!item) {
     return;
   }
@@ -55,77 +49,41 @@ async function onGalleryClick(e) {
   document.addEventListener('keydown', onEscDown);
 
   initId();
-  cardsElems = document.querySelectorAll('.gallery_card');
-    
-  index = [...cardsElems].findIndex((itemLi) => {
-    return itemLi === item;
-  });
+
+  modalPagination.setIdArr('.gallery_card');
+  modalPagination.setIndxOfId(item.dataset.id);
 }
 
 refs.backdropEl.addEventListener('click', onBackdropClick);
 
 function onBackdropClick(e) {
-  
-  
-
   if (e.target.classList.contains('backdrop')) {
-    console.log('backdrop close');
     closeModal();
   }
 
   if (e.target.classList.contains('btn-add-watched')) {
-    console.log('btn-wached');
     addSelectedWatched();
   }
 
   if (e.target.classList.contains('btn-add-queue')) {
-    console.log('btn-queue');
     addSelectedQueue();
   }
   
   if (e.target.closest('.modal__btn-close')) {
-    console.log('close btn');
     closeModal();
   }
 
   if (e.target.classList.contains('btn-plus')) {
-    btnPlus();
+    getFetchCardById(modalPagination.getNextId());
   }
 
   if (e.target.classList.contains('btn-minus')) {
-    console.log('btnMinus');
-    onBtnMinus();
+    getFetchCardById(modalPagination.getPreviousId())
   }
-}
-
- function btnPlus() {
-    index += 1;
-    console.log(index);
-    if (index > cardsElems.length - 1) {
-        index = 0;
-    }
-   
-    const nextIdOfElements = cardsElems[index].dataset.id;
-        
-    getFetchCardById(nextIdOfElements);
-}
-
-function onBtnMinus() {
-  index -= 1;
-  console.log(index);
-  if (index < 0) {
-      index = cardsElems.length - 1;
-  }
-
-  const nextIdOfElements = cardsElems[index].dataset.id;
-
-  getFetchCardById(nextIdOfElements);
 }
 
 function closeModal() {
-  console.log('im close');
   refs.backdropEl.querySelector('.modal').remove();
-  document.body.style.paddingRight = '0';
   document.removeEventListener('keydown', onEscDown);
   refs.backdropEl.classList.add('is-hidden');
   document.body.style.overflow = '';
@@ -153,4 +111,6 @@ async function getFetchCardById(id) {
   
 }
 
-refs.galleryEl.addEventListener('click', onGalleryClick);
+
+
+

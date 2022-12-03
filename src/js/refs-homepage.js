@@ -6,4 +6,6 @@ export const refs = {
   container: document.getElementById('tui-pagination-container'),
   notifySearchFailure: document.querySelector('.search-notify-failure'),
   spinner: document.querySelector('.lds-roller'),
+  backdropEl: document.querySelector('.backdrop'),
+  galleryEl: document.querySelector('.gallery'),
 };
