@@ -6,7 +6,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { addSelectedWatched, addSelectedQueue } from './local-storage';
 import { initId } from './check-include-id';
 import { MovieAPI } from './movie-API';
-import { ModalPagination } from './moda-pagination';
+import { ModalPagination } from './modal-pagination';
 import { refs } from './refs-homepage';
 
 const movieApi = new MovieAPI();
@@ -103,6 +103,7 @@ async function onBackdropClick(e) {
 async function onBtnTrailer() {
   const imgSelected = document.querySelector('.modal__img');
   const idMovie = imgSelected.dataset.id;
+  await fetchAndCreateTrailer(idMovie);
 }
 function closeModal() {
   refs.backdropEl.querySelector('.modal').remove();
@@ -136,13 +137,11 @@ async function getFetchCardById(id) {
 }
 
 async function fetchAndCreateTrailer(id) {
-  const responseWithVideo = await axios.get(
-    `https://api.themoviedb.org/3/movie/${id}/videos?api_key=9cda16d98a6e510af2decf0d66e8e7d5`
-  );
+  const responseWithVideo = await movieApi.getMovieTrailer(id);
 
   modalTrailer = basicLightbox.create(
     `
-  <iframe class='iframe-trailer' width="560" height="315" src="https://www.youtube.com/embed/${responseWithVideo.data.results[0].key}" frameborder="0" allowfullscreen></iframe>
+  <iframe class='iframe-trailer' width="560" height="315" src="https://www.youtube.com/embed/${responseWithVideo.results[0].key}" frameborder="0" allowfullscreen></iframe>
 `
   );
   modalTrailer.show();
