@@ -76,15 +76,17 @@ async function onBackdropClick(e) {
     addSelectedQueue();
   }
   if (e.target.classList.contains('btn-trailer')) {
-    console.log(e.target);
-
     await onBtnTrailer();
-    console.log(e.target);
-    console.log(document.querySelector('.basicLightbox__placeholder'));
+    document.removeEventListener('keydown', onEscDown);
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Escape') {
+        modalTrailer.close();
+        document.addEventListener('keydown', onEscDown);
+      }
+    });
     document
       .querySelector('.basicLightbox__placeholder')
       .addEventListener('click', e => {
-        console.log(e.target);
         if (e.target.classList.contains('basicLightbox__placeholder')) {
           modalTrailer.close();
         }
@@ -117,7 +119,6 @@ function closeModal() {
 
 function onEscDown(e) {
   if (e.code === 'Escape') {
-    modalTrailer.close();
     closeModal();
   }
 }
