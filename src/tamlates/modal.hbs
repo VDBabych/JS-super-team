@@ -1,0 +1,44 @@
+<div class="modal">
+    <button class="modal__btn-close" type="button">
+        <svg class="btn-close-icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 8L22 22" stroke-width="2" />
+            <path d="M8 22L22 8" stroke-width="2" />
+        </svg>
+    </button>
+    <img src="{{this.poster_path}}"
+         alt="photo-of-films" 
+         class="modal__img"
+         width="500"
+         data-id="{{this.id}}"
+        >
+    <div class="modal__wrap-info">
+        <h1 class="modal__title">
+            {{this.original_title}}
+        </h1>
+        <div class="modal__wrap-descr">
+            <div class="modal__wrap-caption">
+                <p class="modal__caption">Vote / Votes</p>
+                <p class="modal__caption">Popularity</p>
+                <p class="modal__caption"> Original Title</p>
+                <p class="modal__caption"> Genre</p>
+            </div>
+            <div class="modal__wrap-value">
+                <p class="modal__value"><span class="actent-color">{{this.vote_average}}</span> / {{this.vote_count}}</p>
+                <p class="modal__value">{{this.popularity}}</p>
+                <p class="modal__value orig-title"> {{this.original_title}}</p>
+                <p class="modal__value genres">{{this.genres}}</p>
+            </div>
+        </div>
+        <h2 class="modal__about">
+            About
+        </h2>
+        <p class="modal__text">
+            {{this.overview}}
+        </p>
+        <div class="wrap-btn">
+            <button class="btn-add-watched" type="button"><span class="btn-help"></span> add to watched</button>
+            <button class="btn-add-queue" type="button"><span class="btn-help"></span> add to queue</button>
+            <button class="btn-trailer" type="button"><span class="btn-help"></span> Trailer</button>
+        </div>
+    </div>
+</div>

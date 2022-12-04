@@ -1,0 +1,14 @@
+{{#each this}}
+<li class="gallery_card" data-id="{{this.id}}">
+      <div class="div-gallery_img">
+        <img src="{{this.poster_path}}" alt='{{this.title}}' class="gallery_img"/>
+        <div class="card_overlay"><span>{{this.overview}}</span>
+        </div>
+      </div>
+      <p class="card_name">{{this.title}}</p>
+      <p class="card_descr">
+        {{this.genre_names}} | {{this.release_date}}<span class="card_rating">{{this.vote_average}}</span>
+      </p>
+    </li>
+{{/each}}
+
