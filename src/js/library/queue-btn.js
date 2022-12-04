@@ -10,6 +10,8 @@ export async function onQueueClick() {
   refs.gallery_library.innerHTML = '';
   refs.library_empty.classList.remove("library_empty", "watched_empty");
   refs.spinner.classList.remove('hidden');
+  refs.libraryWatched.classList.remove('header-library__btn-active');
+  refs.libraryQueue.classList.add('header-library__btn-active');
   const arrSelectedQueue = getQueue();
   if (arrSelectedQueue.length === 0){
     refs.library_empty.classList.add("queue_empty")

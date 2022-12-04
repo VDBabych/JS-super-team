@@ -1,5 +1,4 @@
 'use strict';
-
 import * as basicLightbox from 'basiclightbox';
 import createModalMurkupById from '../tamlates/modal.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -187,6 +186,7 @@ function setThemeOnModal() {
   const btnQueu = document.querySelector('.btn-add-queue');
   const btnTrailer = document.querySelector('.btn-trailer');
   const btnHelp = document.querySelector('.btn-help');
+  const spanModalValue = document.querySelector('.actent-color');
 
   if (!savedTheme) {
     modalEl.classList.remove('dark-theme-modal');
@@ -197,7 +197,8 @@ function setThemeOnModal() {
     btnWach.classList.remove('dark-theme-btn-wached');
     btnQueu.classList.remove('dark-theme-btn-wached');
     btnTrailer.classList.remove('dark-theme-btn-wached');
-    btnHelp.classList.remove('dark-theme-btn-help');
+    // btnHelp.classList.remove('dark-theme-btn-help');
+    spanModalValue.classList.remove('dark-theme-bg');
     return;
   }
   modalEl.classList.add('dark-theme-modal');
@@ -208,5 +209,6 @@ function setThemeOnModal() {
   btnWach.classList.add('dark-theme-btn-wached');
   btnQueu.classList.add('dark-theme-btn-wached');
   btnTrailer.classList.add('dark-theme-btn-wached');
-  btnHelp.classList.remove('dark-theme-btn-help');
+  // btnHelp.classList.add('dark-theme-btn-help');
+  spanModalValue.classList.add('dark-theme-bg');
 }

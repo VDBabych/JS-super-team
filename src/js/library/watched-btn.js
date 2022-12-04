@@ -11,6 +11,8 @@ const movieApi = new MovieAPI();
 export async function onWatchedClick() {
   refs.library_empty.classList.remove("library_empty", "queue_empty");
   refs.gallery_library.innerHTML = '';
+  refs.libraryWatched.classList.add('header-library__btn-active');
+  refs.libraryQueue.classList.remove('header-library__btn-active');
 
   refs.spinner.classList.remove('hidden');
   const arrSelectedWatched = getWatched();
