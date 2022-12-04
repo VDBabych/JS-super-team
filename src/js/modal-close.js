@@ -10,7 +10,6 @@ import { ModalPagination } from './modal-pagination';
 import { refs } from './refs-homepage';
 import poster from '../images/no-poster.png'
 
-
 const movieApi = new MovieAPI();
 
 const modalPagination = new ModalPagination();
@@ -80,7 +79,7 @@ async function onBackdropClick(e) {
   if (e.target.classList.contains('btn-trailer')) {
     await onBtnTrailer();
     document.removeEventListener('keydown', onEscDown);
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       if (e.code === 'Escape') {
         modalTrailer.close();
         document.addEventListener('keydown', onEscDown);
@@ -143,13 +142,25 @@ async function getFetchCardById(id) {
 }
 
 async function fetchAndCreateTrailer(id) {
-  const responseWithVideo = await movieApi.getMovieTrailer(id);
+  let responseWithVideo = await movieApi.getMovieTrailer(id);
+  console.log(responseWithVideo.results.length);
+  if (responseWithVideo.results.length === 0) {
+    modalTrailer = basicLightbox.create(`
+    <img src="${image}" alt="crying cat" width="294px" height="389px" style="margin: auto">;
+    `);
+    modalTrailer.show();
+    return;
+  }
+  responseWithVideo = responseWithVideo.results.find(el => {
+    return el.type === 'Trailer';
+  });
 
   modalTrailer = basicLightbox.create(
     `
-  <iframe class='iframe-trailer' width="560" height="315" src="https://www.youtube.com/embed/${responseWithVideo.results[0].key}" frameborder="0" allowfullscreen></iframe>
+  <iframe class='iframe-trailer' width="560" height="315" src="https://www.youtube.com/embed/${responseWithVideo.key}" frameborder="0" allowfullscreen></iframe>
 `
   );
+
   modalTrailer.show();
 }
 refs.galleryEl.addEventListener('click', onGalleryClick);
