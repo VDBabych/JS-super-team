@@ -35,7 +35,6 @@ const options = {
 export const pagination = new Pagination(refs.container, options);
 
 pagination.on('afterMove', event => {
-  console.log(isSubmitActiv);
   if (isSubmitActiv === true) {
     getFilmCardsBySearch(event.page);
     setTheme();
