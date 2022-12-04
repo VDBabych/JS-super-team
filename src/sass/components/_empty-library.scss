@@ -1,0 +1,21 @@
+.library_empty {
+  background-image: url(../images/search-cat/1.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 477px;
+  background-position: 50%;
+}
+
+.queue_empty {
+  @extend .library_empty;
+  background-image: url(../images/search-cat/2.png);
+  // background-size: contain;
+  // background-repeat: no-repeat;
+  // height: 477px;
+  // background-position: 50%;
+}
+
+.watched_empty {
+  @extend .library_empty;
+  background-image: url(../images/search-cat/3.png);
+}
