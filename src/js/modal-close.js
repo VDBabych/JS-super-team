@@ -1,5 +1,5 @@
 'use strict';
-import axios from '../../node_modules/axios/index';
+// import axios from '../../node_modules/axios/index';
 import * as basicLightbox from 'basiclightbox';
 import createModalMurkupById from '../tamlates/modal.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -8,7 +8,7 @@ import { initId } from './check-include-id';
 import { MovieAPI } from './movie-API';
 import { ModalPagination } from './modal-pagination';
 import { refs } from './refs-homepage';
-import image from '../images/search-cat/crying_cat@1x.png';
+import poster from '../images/no-poster.png'
 
 const movieApi = new MovieAPI();
 
@@ -20,9 +20,8 @@ function updateDataForModal(data) {
   console.log(data);
   return {
     ...data,
-    poster_path: data.poster_path
-      ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
-      : `https://mobiltelefon.ru/photo/february21/05/nothing_naznachila_anons_na_sleduuschuu_nedelu_i_otozvala_ego_picture2_0_resize.jpg`,
+    poster_path: data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
+                                  :  `${poster}`,
     popularity: data.popularity.toFixed(0),
     vote_average: data.vote_average.toFixed(1),
     genres: data.genres
