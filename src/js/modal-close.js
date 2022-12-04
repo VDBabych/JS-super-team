@@ -8,7 +8,10 @@ import { initId } from './check-include-id';
 import { MovieAPI } from './movie-API';
 import { ModalPagination } from './modal-pagination';
 import { refs } from './refs-homepage';
+import { inputTogleEl } from './theme';
+import methodsStorage from './storage-theme';
 
+const THEME_KEY = 'theme';
 const movieApi = new MovieAPI();
 
 const modalPagination = new ModalPagination();
@@ -44,6 +47,18 @@ async function onGalleryClick(e) {
       'beforeend',
       createModalMurkupById(propertieMovie)
     );
+// change theme
+    const modalEl = document.querySelector('.modal');
+    const btnPlus = document.querySelector('.btn-plus');
+    const btnMinus = document.querySelector('.btn-minus');
+    
+    if (inputTogleEl.checked) {
+     
+     modalEl.classList.add('dark-theme-modal');
+      refs.backdropEl.classList.add('dark-theme-modal-bg');
+      btnPlus.classList.add('dark-theme-arrow');
+      btnMinus.classList.add('dark-theme-arrow');
+    }
   } catch (error) {
     Notify.failure(error.message);
     return;
@@ -92,11 +107,11 @@ async function onBackdropClick(e) {
     closeModal();
   }
 
-  if (e.target.classList.contains('btn-plus')) {
+  if (e.target.closest('.btn-plus')) {
     getFetchCardById(modalPagination.getNextId());
   }
 
-  if (e.target.classList.contains('btn-minus')) {
+  if (e.target.closest('.btn-minus')) {
     getFetchCardById(modalPagination.getPreviousId());
   }
 }
@@ -129,6 +144,13 @@ async function getFetchCardById(id) {
       'beforeend',
       createModalMurkupById(propertieMovie)
     );
+    //  change theme
+    if (inputTogleEl.checked) {
+      const modalEl = document.querySelector('.modal');
+      modalEl.classList.add('dark-theme-modal');
+      refs.backdropEl.classList.add('dark-theme-modal-bg');
+    }
+
     initId();
   } catch (error) {
     Notify.failure(error.message);
@@ -147,3 +169,11 @@ async function fetchAndCreateTrailer(id) {
   modalTrailer.show();
 }
 refs.galleryEl.addEventListener('click', onGalleryClick);
+
+// SET THEME ===========================================
+
+function setThemeOnModal() {
+  const savedTheme = methodsStorage.load(THEME_KEY);
+
+  
+}
