@@ -128,7 +128,7 @@
   }
 
   @media screen and (min-width: 768px) {
-    width: 704px;
+    width: 740px;
     // top: 50%;
     // transform: translate(-50%, -50%);
     display: flex;
@@ -230,7 +230,7 @@
 .genres {
   width: 100px;
 }
-.modal__value .actent-color {
+.actent-color {
   display: inline-block;
   background-color: var(--main-accent-color);
   color: var(--pure-white-color);
@@ -238,6 +238,8 @@
   line-height: calc(14 / 12);
   border-radius: 5px;
 }
+
+
 .modal__value:not(:last-child) {
   margin-bottom: 8px;
 }
