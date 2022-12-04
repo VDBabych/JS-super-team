@@ -1,5 +1,5 @@
 'use strict';
-// import axios from '../../node_modules/axios/index';
+
 import * as basicLightbox from 'basiclightbox';
 import createModalMurkupById from '../tamlates/modal.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -14,6 +14,7 @@ import poster from '../images/no-poster.png';
 
 const THEME_KEY = 'theme';
 const movieApi = new MovieAPI();
+let modalTrailer;
 
 const modalPagination = new ModalPagination();
 
@@ -23,8 +24,9 @@ function updateDataForModal(data) {
   console.log(data);
   return {
     ...data,
-    poster_path: data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
-                                  :  `${poster}`,
+    poster_path: data.poster_path
+      ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
+      : `${poster}`,
     popularity: data.popularity.toFixed(0),
     vote_average: data.vote_average.toFixed(1),
     genres: data.genres
@@ -51,7 +53,6 @@ async function onGalleryClick(e) {
       'beforeend',
       createModalMurkupById(propertieMovie)
     );
-// change theme
     setThemeOnModal();
   } catch (error) {
     Notify.failure(error.message);
@@ -154,7 +155,7 @@ async function fetchAndCreateTrailer(id) {
   console.log(responseWithVideo.results.length);
   if (responseWithVideo.results.length === 0) {
     modalTrailer = basicLightbox.create(`
-    <img src="${image}" alt="crying cat" width="294px" height="389px" style="margin: auto">;
+    <img src="${poster}" alt="crying cat" width="294px" height="389px" style="margin: auto">;
     `);
     modalTrailer.show();
     return;
