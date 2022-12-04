@@ -1,5 +1,5 @@
 'use strict';
-import axios from '../../node_modules/axios/index';
+// import axios from '../../node_modules/axios/index';
 import * as basicLightbox from 'basiclightbox';
 import createModalMurkupById from '../tamlates/modal.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -10,6 +10,7 @@ import { ModalPagination } from './modal-pagination';
 import { refs } from './refs-homepage';
 import { inputTogleEl } from './theme';
 import methodsStorage from './storage-theme';
+import poster from '../images/no-poster.png';
 
 const THEME_KEY = 'theme';
 const movieApi = new MovieAPI();
@@ -19,8 +20,11 @@ const modalPagination = new ModalPagination();
 refs.galleryEl.addEventListener('click', onGalleryClick);
 
 function updateDataForModal(data) {
+  console.log(data);
   return {
     ...data,
+    poster_path: data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
+                                  :  `${poster}`,
     popularity: data.popularity.toFixed(0),
     vote_average: data.vote_average.toFixed(1),
     genres: data.genres
@@ -88,15 +92,17 @@ async function onBackdropClick(e) {
     addSelectedQueue();
   }
   if (e.target.classList.contains('btn-trailer')) {
-    console.log(e.target);
-
     await onBtnTrailer();
-    console.log(e.target);
-    console.log(document.querySelector('.basicLightbox__placeholder'));
+    document.removeEventListener('keydown', onEscDown);
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Escape') {
+        modalTrailer.close();
+        document.addEventListener('keydown', onEscDown);
+      }
+    });
     document
       .querySelector('.basicLightbox__placeholder')
       .addEventListener('click', e => {
-        console.log(e.target);
         if (e.target.classList.contains('basicLightbox__placeholder')) {
           modalTrailer.close();
         }
@@ -129,7 +135,6 @@ function closeModal() {
 
 function onEscDown(e) {
   if (e.code === 'Escape') {
-    modalTrailer.close();
     closeModal();
   }
 }
@@ -159,13 +164,25 @@ async function getFetchCardById(id) {
 }
 
 async function fetchAndCreateTrailer(id) {
-  const responseWithVideo = await movieApi.getMovieTrailer(id);
+  let responseWithVideo = await movieApi.getMovieTrailer(id);
+  console.log(responseWithVideo.results.length);
+  if (responseWithVideo.results.length === 0) {
+    modalTrailer = basicLightbox.create(`
+    <img src="${image}" alt="crying cat" width="294px" height="389px" style="margin: auto">;
+    `);
+    modalTrailer.show();
+    return;
+  }
+  responseWithVideo = responseWithVideo.results.find(el => {
+    return el.type === 'Trailer';
+  });
 
   modalTrailer = basicLightbox.create(
     `
-  <iframe class='iframe-trailer' width="560" height="315" src="https://www.youtube.com/embed/${responseWithVideo.results[0].key}" frameborder="0" allowfullscreen></iframe>
+  <iframe class='iframe-trailer' width="560" height="315" src="https://www.youtube.com/embed/${responseWithVideo.key}" frameborder="0" allowfullscreen></iframe>
 `
   );
+
   modalTrailer.show();
 }
 refs.galleryEl.addEventListener('click', onGalleryClick);
