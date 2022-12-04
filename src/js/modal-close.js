@@ -20,7 +20,6 @@ const modalPagination = new ModalPagination();
 refs.galleryEl.addEventListener('click', onGalleryClick);
 
 function updateDataForModal(data) {
-  console.log(data);
   return {
     ...data,
     poster_path: data.poster_path
@@ -151,7 +150,6 @@ async function getFetchCardById(id) {
 
 async function fetchAndCreateTrailer(id) {
   let responseWithVideo = await movieApi.getMovieTrailer(id);
-  console.log(responseWithVideo.results.length);
   if (responseWithVideo.results.length === 0) {
     modalTrailer = basicLightbox.create(`
     <img src="${poster}" alt="crying cat" width="294px" height="389px" style="margin: auto">;
