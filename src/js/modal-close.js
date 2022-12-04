@@ -52,17 +52,7 @@ async function onGalleryClick(e) {
       createModalMurkupById(propertieMovie)
     );
 // change theme
-    const modalEl = document.querySelector('.modal');
-    const btnPlus = document.querySelector('.btn-plus');
-    const btnMinus = document.querySelector('.btn-minus');
-    
-    if (inputTogleEl.checked) {
-     
-     modalEl.classList.add('dark-theme-modal');
-      refs.backdropEl.classList.add('dark-theme-modal-bg');
-      btnPlus.classList.add('dark-theme-arrow');
-      btnMinus.classList.add('dark-theme-arrow');
-    }
+    setThemeOnModal();
   } catch (error) {
     Notify.failure(error.message);
     return;
@@ -150,11 +140,7 @@ async function getFetchCardById(id) {
       createModalMurkupById(propertieMovie)
     );
     //  change theme
-    if (inputTogleEl.checked) {
-      const modalEl = document.querySelector('.modal');
-      modalEl.classList.add('dark-theme-modal');
-      refs.backdropEl.classList.add('dark-theme-modal-bg');
-    }
+    setThemeOnModal();
 
     initId();
   } catch (error) {
@@ -192,5 +178,34 @@ refs.galleryEl.addEventListener('click', onGalleryClick);
 function setThemeOnModal() {
   const savedTheme = methodsStorage.load(THEME_KEY);
 
-  
+  const modalEl = document.querySelector('.modal');
+  const btnPlus = document.querySelector('.btn-plus');
+  const btnMinus = document.querySelector('.btn-minus');
+  const btnClose = document.querySelector('.btn-close-icon');
+  const btnWach = document.querySelector('.btn-add-watched');
+  const btnQueu = document.querySelector('.btn-add-queue');
+  const btnTrailer = document.querySelector('.btn-trailer');
+  const btnHelp = document.querySelector('.btn-help');
+
+  if (!savedTheme) {
+    modalEl.classList.remove('dark-theme-modal');
+    refs.backdropEl.classList.remove('dark-theme-modal-bg');
+    btnPlus.classList.remove('dark-theme-arrow');
+    btnMinus.classList.remove('dark-theme-arrow');
+    btnClose.classList.remove('dark-theme-btn-close');
+    btnWach.classList.remove('dark-theme-btn-wached');
+    btnQueu.classList.remove('dark-theme-btn-wached');
+    btnTrailer.classList.remove('dark-theme-btn-wached');
+    btnHelp.classList.remove('dark-theme-btn-help');
+    return;
+  }
+  modalEl.classList.add('dark-theme-modal');
+  refs.backdropEl.classList.add('dark-theme-modal-bg');
+  btnPlus.classList.add('dark-theme-arrow');
+  btnMinus.classList.add('dark-theme-arrow');
+  btnClose.classList.add('dark-theme-btn-close');
+  btnWach.classList.add('dark-theme-btn-wached');
+  btnQueu.classList.add('dark-theme-btn-wached');
+  btnTrailer.classList.add('dark-theme-btn-wached');
+  btnHelp.classList.remove('dark-theme-btn-help');
 }

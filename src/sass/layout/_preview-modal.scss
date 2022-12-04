@@ -150,7 +150,19 @@
   position: absolute;
   top: 8px;
   right: 8px;
+  transition: all 0.5s ease;
 }
+
+.btn-close-icon {
+  stroke: #000000;
+  transition: all 0.5s ease;
+}
+
+.btn-close-icon:hover {
+  stroke: var(--main-accent-color);
+  transform: rotate(180deg);
+}
+
 
 .modal__img {
   margin: 0 auto;
@@ -254,7 +266,6 @@
 .btn-add-queue,
 .btn-trailer {
   display: block;
-  //   width: 110px;
   width: calc((100% - 40px) / 3);
   min-height: 44px;
 
@@ -312,21 +323,49 @@
   right: 0;
   width: 100%;
 }
-.btn-trailer {
-  background-color: var(--main-accent-color);
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
-  color: var(--pure-white-color);
+
+.btn-add-queue:hover .btn-help {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+
+.btn-trailer:hover .btn-help {
+  left: auto;
+  right: 0;
+  width: 100%;
 }
 
 .btn-add-watched:active {
   top: 2px;
 }
+.btn-add-queue:active {
+  top: 2px;
+}
+.btn-trailer:active {
+  top: 2px;
+}
 
 .btn-add-active {
   font-weight: 500;
-  background-color: var(--main-accent-color);
   border: none;
   color: var(--pure-white-color);
+
+  background: linear-gradient(0deg, rgba(255,151,0,1) 0%, rgba(251,75,2,1) 100%);
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+}
+
+.btn-add-active-dark {
+  font-weight: 500;
+  border: none;
+  color: var(--pure-white-color);
+
+  background: linear-gradient(0deg, rgb(140, 0, 255) 0%, rgb(251, 2, 238) 100%);
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
 }
 
 .modal-icon-close {

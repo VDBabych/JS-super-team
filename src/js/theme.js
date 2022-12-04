@@ -5,7 +5,7 @@ export const inputTogleEl = document.querySelector('.theme-switch__toggle');
 const iconLigthEl = document.querySelector('.sun-icon');
 const iconDarkEl = document.querySelector('.moon-icon');
 
-const THEME_KEY = 'theme';
+export const THEME_KEY = 'theme';
 
 
 
@@ -13,7 +13,7 @@ inputTogleEl.addEventListener('change', onInputClick);
 
 
 
-function onInputClick() {
+export function onInputClick() {
     const textChangeDark = document.querySelectorAll('.card_descr');
     const spanChangeDark = document.querySelectorAll('.card_rating');
 
