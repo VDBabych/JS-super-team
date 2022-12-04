@@ -1,6 +1,6 @@
 'use strict';
-// import axios from '../../node_modules/axios/index';
-import { basicLightbox } from 'basiclightbox';
+
+import * as basicLightbox from 'basiclightbox';
 import createModalMurkupById from '../tamlates/modal.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { addSelectedWatched, addSelectedQueue } from './local-storage';
@@ -15,6 +15,7 @@ import poster from '../images/no-poster.png';
 const THEME_KEY = 'theme';
 const movieApi = new MovieAPI();
 let modalTrailer;
+
 const modalPagination = new ModalPagination();
 
 refs.galleryEl.addEventListener('click', onGalleryClick);
@@ -23,8 +24,9 @@ function updateDataForModal(data) {
   console.log(data);
   return {
     ...data,
-    poster_path: data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
-                                  :  `${poster}`,
+    poster_path: data.poster_path
+      ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
+      : `${poster}`,
     popularity: data.popularity.toFixed(0),
     vote_average: data.vote_average.toFixed(1),
     genres: data.genres
@@ -51,7 +53,6 @@ async function onGalleryClick(e) {
       'beforeend',
       createModalMurkupById(propertieMovie)
     );
-// change theme
     setThemeOnModal();
   } catch (error) {
     Notify.failure(error.message);
@@ -154,7 +155,7 @@ async function fetchAndCreateTrailer(id) {
   console.log(responseWithVideo.results.length);
   if (responseWithVideo.results.length === 0) {
     modalTrailer = basicLightbox.create(`
-    <img src="${image}" alt="crying cat" width="294px" height="389px" style="margin: auto">;
+    <img src="${poster}" alt="crying cat" width="294px" height="389px" style="margin: auto">;
     `);
     modalTrailer.show();
     return;
@@ -186,7 +187,6 @@ function setThemeOnModal() {
   const btnQueu = document.querySelector('.btn-add-queue');
   const btnTrailer = document.querySelector('.btn-trailer');
   const btnHelp = document.querySelector('.btn-help');
-  const spanModalValue = document.querySelector('.actent-color');
 
   if (!savedTheme) {
     modalEl.classList.remove('dark-theme-modal');
@@ -197,8 +197,7 @@ function setThemeOnModal() {
     btnWach.classList.remove('dark-theme-btn-wached');
     btnQueu.classList.remove('dark-theme-btn-wached');
     btnTrailer.classList.remove('dark-theme-btn-wached');
-    // btnHelp.classList.remove('dark-theme-btn-help');
-    spanModalValue.classList.remove('dark-theme-bg');
+    btnHelp.classList.remove('dark-theme-btn-help');
     return;
   }
   modalEl.classList.add('dark-theme-modal');
@@ -209,6 +208,5 @@ function setThemeOnModal() {
   btnWach.classList.add('dark-theme-btn-wached');
   btnQueu.classList.add('dark-theme-btn-wached');
   btnTrailer.classList.add('dark-theme-btn-wached');
-  // btnHelp.classList.add('dark-theme-btn-help');
-  spanModalValue.classList.add('dark-theme-bg');
+  btnHelp.classList.remove('dark-theme-btn-help');
 }
