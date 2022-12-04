@@ -1,0 +1,154 @@
+.toolbar {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color:rgba(235, 231, 231, 0.479);
+    backdrop-filter: blur(1px);
+}
+
+.theme-switch {
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch__control {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    width: 64px;
+    height: 32px;
+    border-radius: 50em;
+    padding: 3px 0;
+}
+
+.theme-switch__toggle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  pointer-events: none;
+}
+
+.theme-switch__track {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: transparent;
+  user-select: none;
+  background-color: #333;
+  border-radius: inherit;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.theme-switch__marker {
+  position: relative;
+  background-color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  transform: translateX(3px);
+  transition: transform 0.5s ease;
+}
+
+.sun-icon {
+    margin-right: 15px;
+    transition: fill 0.5s ease;
+}
+
+.moon-icon {
+    margin-left: 15px;
+    transition: fill 0.5s ease;
+}
+
+.active-color {
+    fill: var(--main-accent-color);
+    transition: fill 0.5s ease;
+}
+
+.theme-switch__toggle:checked + .theme-switch__track {
+  background-color: #d3d3d4;
+}
+
+.theme-switch__toggle:checked ~ .theme-switch__marker {
+  transform: translateX(35px);
+}
+
+.theme-switch__toggle:focus + .theme-switch__track,
+.theme-switch__toggle:active + .theme-switch__track {
+  box-shadow: 0 0 0 3px var(--main-accent-color);
+}
+
+// ========================== dark THEME ========================
+
+.dark-theme {
+    background-color:#333;
+    color: white;
+}
+
+.dark-theme-text {
+    color:rgb(218, 45, 203);
+}
+
+.dark-theme-bg {
+    background-color:rgb(218, 45, 203);
+} 
+
+.dark-theme-modal {
+    background-color:#333;
+    border:2px solid rgb(218, 45, 203);
+    border-radius: 5px;
+}
+
+.dark-theme-modal-bg {
+    background-color:rgba(235, 231, 231, 0.719);
+    backdrop-filter: blur(3px);
+}
+
+.dark-theme-arrow {
+  fill: rgb(218, 45, 203);
+  border-color: rgb(218, 45, 203);
+  box-shadow:0 0 20px rgb(218, 45, 203);
+}
+
+
+.dark-theme-btn-close {
+  stroke: white;
+  transition: all 0.5s ease;
+}
+.dark-theme-btn-close:hover {
+  stroke: rgb(218, 45, 203);
+}
+
+.dark-theme-btn-active {
+  background: linear-gradient(0deg, #ff00bc 0%, #9d02fb 100%);
+}
+
+.dark-theme-btn-wached {
+  color: white;
+  box-shadow: inset -7px -7px 20px #9b9a9a79, 
+  -4px -4px 5px #0009, 
+  7px 7px 20px #0002, 
+  4px 4px 5px #0001;
+}
+
+.dark-theme-btn-help {
+  box-shadow: inset -7px -7px 20px #0009, inset -4px -4px 5px #0009, inset 7px 7px 20px #68686822, inset 4px 4px 5px #e9e8e811;
+}

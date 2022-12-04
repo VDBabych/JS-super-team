@@ -2,6 +2,10 @@
 import { getWatched, getQueue } from './init-form';
 export const STORAGE_WATCHED = 'watched-state';
 export const STORAGE_QUEUE = 'queue-state';
+// Theme
+import methodsStorage from './storage-theme';
+import { THEME_KEY } from './theme';
+// ================================
 
 export function addSelectedWatched(e) {
   const imgSelected = document.querySelector('.modal__img');
@@ -11,9 +15,21 @@ export function addSelectedWatched(e) {
 
   if (arrWatchedIds.includes(imgId)) {
     arrWatchedIds.splice(arrWatchedIds.indexOf(imgId), 1);
+    // Theme
+    const savedTheme = methodsStorage.load(THEME_KEY);
+    if (savedTheme) {
+      btnWatched.classList.remove('btn-add-active-dark');
+    }
+    // ===========================
     btnWatched.classList.remove('btn-add-active');
   } else {
     arrWatchedIds.push(imgId);
+    // Theme
+    const savedTheme = methodsStorage.load(THEME_KEY);
+     if (savedTheme) {
+      btnWatched.classList.add('btn-add-active-dark');
+    }
+//  ===================
     btnWatched.classList.add('btn-add-active');
   }
 
@@ -28,9 +44,21 @@ export function addSelectedQueue(e) {
 
   if (arrQueueIds.includes(imgId)) {
     arrQueueIds.splice(arrQueueIds.indexOf(imgId), 1);
+    // Theme
+    const savedTheme = methodsStorage.load(THEME_KEY);
+    if (savedTheme) {
+      btnQueue.classList.remove('btn-add-active-dark');
+    }
+    // ===========================
     btnQueue.classList.remove('btn-add-active');
   } else {
     arrQueueIds.push(imgId);
+    // Theme
+    const savedTheme = methodsStorage.load(THEME_KEY);
+     if (savedTheme) {
+      btnQueue.classList.add('btn-add-active-dark');
+    }
+    // ===========================
     btnQueue.classList.add('btn-add-active');
   }
 

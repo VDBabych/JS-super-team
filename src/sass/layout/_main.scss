@@ -94,6 +94,7 @@ overflow: hidden;
   font-weight: 500;
   line-height: calc(14 / 12);
   color: var(--main-accent-color);
+  transition: all 1.5s ease;
   @include mq(tab) {
     margin-bottom: 0;
     line-height: calc(16 / 12);
@@ -113,6 +114,7 @@ overflow: hidden;
   border-radius: 5px;
   line-height: calc(14 / 12);
   font-weight: 500;
+  transition: all 1.5s ease;
   @include mq(desk) {
     width: 40px;
     height: 20px;

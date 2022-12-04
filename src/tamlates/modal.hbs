@@ -1,8 +1,8 @@
 <div class="modal">
     <button class="modal__btn-close" type="button">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 8L22 22" stroke="black" stroke-width="2" />
-            <path d="M8 22L22 8" stroke="black" stroke-width="2" />
+        <svg class="btn-close-icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 8L22 22" stroke-width="2" />
+            <path d="M8 22L22 8" stroke-width="2" />
         </svg>
     </button>
     <img src="{{this.poster_path}}"
@@ -36,9 +36,9 @@
             {{this.overview}}
         </p>
         <div class="wrap-btn">
-            <button class="btn-add-watched" type="button">add to watched</button>
-            <button class="btn-add-queue" type="button">add to queue</button>
-            <button class="btn-trailer" type="button">Trailer</button>
+            <button class="btn-add-watched" type="button"><span class="btn-help"></span> add to watched</button>
+            <button class="btn-add-queue" type="button"><span class="btn-help"></span> add to queue</button>
+            <button class="btn-trailer" type="button"><span class="btn-help"></span> Trailer</button>
         </div>
     </div>
 </div>
