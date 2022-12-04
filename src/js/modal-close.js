@@ -1,6 +1,6 @@
 'use strict';
 // import axios from '../../node_modules/axios/index';
-import * as basicLightbox from 'basiclightbox';
+import { basicLightbox } from 'basiclightbox';
 import createModalMurkupById from '../tamlates/modal.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { addSelectedWatched, addSelectedQueue } from './local-storage';
@@ -14,7 +14,7 @@ import poster from '../images/no-poster.png';
 
 const THEME_KEY = 'theme';
 const movieApi = new MovieAPI();
-
+let modalTrailer;
 const modalPagination = new ModalPagination();
 
 refs.galleryEl.addEventListener('click', onGalleryClick);
