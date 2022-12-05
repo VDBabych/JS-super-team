@@ -1,22 +1,25 @@
 <header class="header-library">
-    <div class="header-library__container container">
-      <nav class="nav_group">
-        <div class="header-library__logo-nav-position">
-            <a href="./index.html" class="header-library__logo">
-                <svg role="img" width="24px" height="24px" class="header_icon-film">
-                    <use href="./images/icons.svg#icon-film"></use>
-                </svg>
-                <p class="header-library__logo-text">Filmoteka</p>
-            </a>
-        </div>
-        <ul class="header-library__nav-position">
-          <li class="header-library__nav"><a href="./index.html">home</a>
-          <li class="header-library__nav header_nav-link-current"><a href="./library.html" class="current">my library</a>
-        </ul>
-      </nav>
-        <div class="header-library__btn-position">
-            <button type="button" class="header-library__btn watched">watched</button>
-            <button type="button" class="header-library__btn queue">queue</button>
-        </div>
+  <div class="header-library__container container">
+    <nav class="nav_group">
+      <div class="header-library__logo-nav-position">
+        <a href="./index.html" class="header-library__logo">
+          <svg role="img" width="24px" height="24px" class="header_icon-film">
+            <use href="./images/icons.svg#icon-film"></use>
+          </svg>
+          <p class="header-library__logo-text">Filmoteka</p>
+        </a>
+      </div>
+      <ul class="header-library__nav-position">
+        <li class="header-library__nav"><a href="./index.html">home</a></li>
+        <li class="header-library__nav header_nav-link-current">
+          <a href="./library.html" class="current">my library</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="header-library__btn-position">
+      <button type="button" class="header-library__btn watched">watched</button>
+      <button type="button" class="header-library__btn queue">queue</button>
     </div>
+    <include src="./partials/theme.html"></include>
+  </div>
 </header>
