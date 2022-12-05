@@ -3,3 +3,4 @@ import './js/pagination';
 import './js/modal-close';
 import './js/local-storage';
 import './js/theme';
+import './js/modal-students';
