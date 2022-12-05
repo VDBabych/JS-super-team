@@ -1,6 +1,5 @@
 'use strict';
-// import axios from '../../node_modules/axios/index';
-import * as basicLightbox from 'basiclightbox'
+import * as basicLightbox from 'basiclightbox';
 import createModalMurkupById from '../tamlates/modal.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { addSelectedWatched, addSelectedQueue } from './local-storage';
@@ -15,17 +14,17 @@ import no_trailer from '../images/no-trailer.png'
 
 const THEME_KEY = 'theme';
 const movieApi = new MovieAPI();
-let modalTrailer = null;
+let modalTrailer;
 const modalPagination = new ModalPagination();
 
 refs.galleryEl.addEventListener('click', onGalleryClick);
 
 function updateDataForModal(data) {
-  console.log(data);
   return {
     ...data,
-    poster_path: data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
-                                  :  `${poster}`,
+    poster_path: data.poster_path
+      ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
+      : `${poster}`,
     popularity: data.popularity.toFixed(0),
     vote_average: data.vote_average.toFixed(1),
     genres: data.genres
@@ -52,7 +51,6 @@ async function onGalleryClick(e) {
       'beforeend',
       createModalMurkupById(propertieMovie)
     );
-// change theme
     setThemeOnModal();
   } catch (error) {
     Notify.failure(error.message);
@@ -152,7 +150,6 @@ async function getFetchCardById(id) {
 
 async function fetchAndCreateTrailer(id) {
   let responseWithVideo = await movieApi.getMovieTrailer(id);
-  console.log(responseWithVideo.results.length);
   if (responseWithVideo.results.length === 0) {
     modalTrailer = basicLightbox.create(`
     <img src="${no_trailer}" alt="no trailer image" width="50%" height="40~%" style="margin: auto">;

@@ -3,6 +3,7 @@ import 'tui-pagination/dist/tui-pagination.css';
 import { getFilmCardsBySearch, isSubmitActiv } from './search';
 import { contentLoad } from './trends';
 import { refs } from './refs-homepage';
+import { setTheme } from './theme';
 
 const options = {
   totalItems: 20000,
@@ -17,11 +18,11 @@ const options = {
     currentPage:
       '<strong class=" main-page-pag-btn main-page-selected">{{page}}</strong>',
     moveButton:
-      '<a href="#" class=" main-page-pag-btn tui-{{type}}">' +
+      '<a href="#" class=" main-page-pag-btn main-{{type}}">' +
       '<span class="tui-ico-{{type}}">{{type}}</span>' +
       '</a>',
     disabledMoveButton:
-      '<span class=" main-page-pag-btn tui-is-disabled tui-{{type}}">' +
+      '<span class=" main-page-pag-btn tui-is-disabled main-{{type}}">' +
       '<span class="tui-ico-{{type}}">{{type}}</span>' +
       '</span>',
     moreButton:
@@ -34,10 +35,11 @@ const options = {
 export const pagination = new Pagination(refs.container, options);
 
 pagination.on('afterMove', event => {
-  console.log(isSubmitActiv);
   if (isSubmitActiv === true) {
     getFilmCardsBySearch(event.page);
+    setTheme();
     return;
   }
   contentLoad(event.page);
+  setTheme();
 });

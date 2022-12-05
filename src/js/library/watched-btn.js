@@ -16,7 +16,6 @@ export async function onWatchedClick() {
 
   refs.spinner.classList.remove('hidden');
   const arrSelectedWatched = getWatched();
-  console.log(arrSelectedWatched)
   if (arrSelectedWatched.length === 0){
     refs.library_empty.classList.add("watched_empty")
   }

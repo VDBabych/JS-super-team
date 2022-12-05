@@ -52,3 +52,108 @@
   background: transparent;
   border-radius: 5px;
 }
+body.dark-theme .tui-pagination {
+  .main-page-selected:hover {
+    color: var(--pure-white-color);
+    background-color: rgb(218, 45, 203);
+  }
+  .main-page-selected {
+    color: var(--pure-white-color);
+    background-color: rgb(218, 45, 203);
+  }
+  strong {
+    color: var(--pure-white-color);
+    background-color: rgb(218, 45, 203);
+  }
+  .main-page-pag-btn {
+    color: var(--pure-white-color);
+  }
+  .main-first,
+  .main-prev,
+  .main-next,
+  .main-last,
+  .main-prev-is-ellip,
+  .main-next-is-ellip {
+    background-color: rgb(218, 45, 203);
+    border: none;
+  }
+}
+//  -------------------------------------------------
+// --------------------------------------------
+
+// .tui-pagination .tui-is-selected:hover {
+//   background-color: #4b96e6;
+// }
+
+// .tui-pagination .tui-first-child.tui-is-selected,
+// .tui-pagination strong.tui-first-child {
+//   margin-left: 0;
+// }
+
+.tui-pagination .tui-first-child,
+.tui-pagination .tui-prev-is-ellip {
+  border-left: 1px solid #ddd;
+}
+
+.tui-pagination .tui-last-child,
+.tui-pagination .tui-next-is-ellip {
+  border-right: 1px solid #ddd;
+}
+
+// .tui-pagination .tui-first-child.tui-is-selected {
+//   border-left: 1px solid #4b96e6;
+// }
+
+// .tui-pagination .tui-last-child.tui-is-selected {
+//   border-right: 1px solid #4b96e6;
+// }
+
+.tui-pagination .main-first,
+.tui-pagination .main-prev,
+.tui-pagination .main-next,
+.tui-pagination .main-last,
+.tui-pagination .main-prev-is-ellip,
+.tui-pagination .main-next-is-ellip {
+  overflow: hidden;
+  height: 26px;
+  padding: 0;
+  font-size: 0;
+  line-height: 26px;
+  white-space: nowrap;
+  font-weight: normal;
+  color: var(--pure-white-color);
+
+  border: 1px solid #ddd;
+}
+
+.tui-pagination .main-prev-is-ellip {
+  border-right: 0;
+}
+
+.tui-pagination .main-next-is-ellip {
+  border-left: 0;
+}
+
+.tui-pagination .main-first + .main-prev,
+.tui-pagination .main-next + .main-last {
+  border-left: 0;
+}
+
+.tui-pagination .main-prev-is-ellip,
+.tui-pagination .main-next-is-ellip {
+  padding: 0;
+  line-height: 1;
+}
+
+.tui-pagination .main-prev {
+  margin-right: 10px;
+}
+
+.tui-pagination .main-next {
+  margin-left: 10px;
+}
+
+.tui-pagination .main-is-disabled:hover {
+  color: var(--pure-white-color);
+  cursor: default;
+}
