@@ -50,6 +50,12 @@
   gap: 40px;
   font-weight: 500;
   text-transform: uppercase;
+
+  @include mq(mob-only) {
+    & {
+      padding-top: 4px;
+    }
+}
 }
 
 .header_nav-link {

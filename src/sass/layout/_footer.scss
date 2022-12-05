@@ -8,7 +8,6 @@
 .footer__container{
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
     gap: 10px;
     @include mq(tab) {
@@ -20,6 +19,7 @@
 .footer__wrap{
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .footer__icon {
@@ -40,4 +40,13 @@
 
 .footer__accent-text{
     text-decoration: underline;
+
+    &:hover, &:focus {
+      cursor: pointer;
+      color: var(--main-accent-color);
+    }
+}
+
+.footer__icon {
+  fill: var(--main-accent-color);
 }

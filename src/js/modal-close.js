@@ -10,11 +10,11 @@ import { refs } from './refs-homepage';
 import { inputTogleEl } from './theme';
 import methodsStorage from './storage-theme';
 import poster from '../images/no-poster.png';
+import no_trailer from '../images/no-trailer.png'
 
 const THEME_KEY = 'theme';
 const movieApi = new MovieAPI();
 let modalTrailer;
-
 const modalPagination = new ModalPagination();
 
 refs.galleryEl.addEventListener('click', onGalleryClick);
@@ -122,7 +122,7 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-function onEscDown(e) {
+ function onEscDown(e) {
   if (e.code === 'Escape') {
     closeModal();
   }
@@ -152,7 +152,7 @@ async function fetchAndCreateTrailer(id) {
   let responseWithVideo = await movieApi.getMovieTrailer(id);
   if (responseWithVideo.results.length === 0) {
     modalTrailer = basicLightbox.create(`
-    <img src="${poster}" alt="crying cat" width="294px" height="389px" style="margin: auto">;
+    <img src="${no_trailer}" alt="no trailer image" width="50%" height="40~%" style="margin: auto">;
     `);
     modalTrailer.show();
     return;
@@ -162,9 +162,7 @@ async function fetchAndCreateTrailer(id) {
   });
 
   modalTrailer = basicLightbox.create(
-    `
-  <iframe class='iframe-trailer' width="560" height="315" src="https://www.youtube.com/embed/${responseWithVideo.key}" frameborder="0" allowfullscreen></iframe>
-`
+    `<iframe class='iframe-trailer' width="560" height="315" src="https://www.youtube.com/embed/${responseWithVideo.key}" frameborder="0" allowfullscreen></iframe>`
   );
 
   modalTrailer.show();

@@ -8,4 +8,7 @@ export const refs = {
   spinner: document.querySelector('.lds-roller'),
   backdropEl: document.querySelector('.backdrop'),
   galleryEl: document.querySelector('.gallery'),
+  studentLink: document.querySelector('.footer__accent-text'),
+  studentModal: document.querySelector('.modal-students'),
+  backdropStudents: document.querySelector('.backdrop_students'),
 };
