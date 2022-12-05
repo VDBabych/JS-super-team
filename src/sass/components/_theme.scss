@@ -22,6 +22,7 @@
 .theme-switch {
     display: flex;
     align-items: center;
+    z-index: 0;
 }
 
 .theme-switch__control {
